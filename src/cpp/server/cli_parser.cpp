@@ -12,12 +12,17 @@ CLIParser::CLIParser()
 
     app_.set_version_flag("-v,--version", (APP_NAME " version " LEMON_VERSION_STRING));
 
-    // Positional arg: lemonade cache directory (optional)
-    // Default to platform-specific cache dir when not specified
-    app_.add_option("cache_dir", config_.cache_dir,
-                    "Lemonade cache directory containing config.json and model data")
+    // Positional arg: lemonade cache/data directory (optional)
+    // Default to the platform-specific cache dir when not specified
+    cache_dir_opt_ = app_.add_option("cache_dir", config_.cache_dir,
+                    "Lemonade cache directory for downloaded/runtime data")
         ->type_name("DIR")
         ->default_val(utils::get_cache_dir());
+
+    config_dir_opt_ = app_.add_option("config_dir", config_.config_dir,
+                    "Lemonade config directory for persistent JSON state")
+        ->type_name("DIR")
+        ->default_val(utils::get_config_dir());
 
     app_.add_option("--port", config_.port, "Port number to serve on (overrides config.json)")
         ->type_name("PORT");
@@ -29,6 +34,13 @@ CLIParser::CLIParser()
 int CLIParser::parse(int argc, char** argv) {
     try {
         app_.parse(argc, argv);
+        // When a custom cache dir is given without an explicit config dir, keep
+        // persistent JSON state alongside it instead of splitting it off to the
+        // platform config default. Only the standard (defaulted) cache layout is
+        // remapped to the config directory.
+        if (cache_dir_opt_->count() > 0 && config_dir_opt_->count() == 0) {
+            config_.config_dir = config_.cache_dir;
+        }
         should_continue_ = true;
         exit_code_ = 0;
         return 0;  // Success, continue

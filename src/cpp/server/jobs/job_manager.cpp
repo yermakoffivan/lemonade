@@ -79,9 +79,11 @@ bool job_needs_exclusive(const Job& job, const OpRegistry& registry) {
 
 }
 
-JobManager::JobManager(std::string cache_dir, OpRegistry registry)
-    : storage_path_((fs::path(cache_dir) / "jobs.json").string()),
+JobManager::JobManager(std::string cache_dir, std::string config_dir, OpRegistry registry)
+    : storage_path_((fs::path(config_dir) /
+                     "jobs.json").string()),
       registry_(std::move(registry)) {
+    lemon::utils::migrate_legacy_json_files_to_config_dir(cache_dir, config_dir);
     load_from_disk();
     worker_ = std::thread(&JobManager::worker_main, this);
 }

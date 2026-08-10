@@ -982,6 +982,7 @@ static GGUFFiles identify_gguf_models(
 
 ModelManager::ModelManager(const std::string& extra_models_dir)
     : extra_models_dir_(extra_models_dir) {
+    migrate_legacy_json_files_to_config_dir(get_cache_dir(), get_config_dir());
     server_models_ = load_server_models();
     user_models_ = load_optional_json(get_user_models_file());
     recipe_options_ = load_optional_json(get_recipe_options_file());
@@ -1036,11 +1037,11 @@ ModelManager::ModelManager(const std::string& extra_models_dir)
 }
 
 std::string ModelManager::get_user_models_file() {
-    return get_cache_dir() + "/user_models.json";
+    return get_config_dir() + "/user_models.json";
 }
 
 std::string ModelManager::get_recipe_options_file() {
-    return get_cache_dir() + "/recipe_options.json";
+    return get_config_dir() + "/recipe_options.json";
 }
 
 std::string ModelManager::get_hf_cache_dir() const {

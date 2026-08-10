@@ -60,12 +60,14 @@ fi
 
 # Define paths to migrate
 declare -a SOURCE_PATHS=(
+    "$SOURCE_HOME/.config/lemonade"
     "$SOURCE_HOME/.cache/lemonade"
     "$SOURCE_HOME/.cache/huggingface"
     "$SOURCE_HOME/.local/share/lemonade-server"
 )
 
 declare -a DEST_PATHS=(
+    "$LEMONADE_HOME/.config/lemonade"
     "$LEMONADE_HOME/.cache/lemonade"
     "$LEMONADE_HOME/.cache/huggingface"
     "$LEMONADE_HOME/.local/share/lemonade-server"

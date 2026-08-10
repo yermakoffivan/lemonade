@@ -76,7 +76,11 @@ int main(int argc, char** argv) {
         }
 
         utils::set_cache_dir(cli_config.cache_dir);
-        json config_json = ConfigFile::load(cli_config.cache_dir);
+        utils::set_config_dir(cli_config.config_dir);
+        utils::migrate_legacy_json_files_to_config_dir(cli_config.cache_dir,
+                                                       cli_config.config_dir);
+        json config_json = ConfigFile::load(cli_config.cache_dir,
+                                            cli_config.config_dir);
 
         // CLI --port/--host override config.json and persist
         bool cli_overrides = false;
@@ -95,7 +99,7 @@ int main(int argc, char** argv) {
         configure_application_logging(config->log_level(), LoggingMode::direct_server);
 
         if (cli_overrides) {
-            ConfigFile::save(cli_config.cache_dir, config_json);
+            ConfigFile::save(cli_config.config_dir, config_json);
             if (cli_config.port != -1) {
                 LOG(INFO) << "Persisted port=" << cli_config.port << " to config.json" << std::endl;
             }
@@ -109,6 +113,7 @@ int main(int argc, char** argv) {
         LOG(INFO) << "Starting Lemonade Server..." << std::endl;
         LOG(INFO) << "  Version: " << LEMON_VERSION_STRING << std::endl;
         LOG(INFO) << "  Cache dir: " << cli_config.cache_dir << std::endl;
+        LOG(INFO) << "  Config dir: " << cli_config.config_dir << std::endl;
         LOG(INFO) << "  Port: " << config->port() << std::endl;
         LOG(INFO) << "  Host: " << config->host() << std::endl;
         LOG(INFO) << "  Log level: " << config->log_level() << std::endl;
@@ -133,7 +138,7 @@ int main(int argc, char** argv) {
             LOG(INFO) << "  Telemetry: disabled" << std::endl;
         }
 
-        Server server(config, cli_config.cache_dir);
+        Server server(config, cli_config.cache_dir, cli_config.config_dir);
 
         g_server_instance = &server;
         std::signal(SIGINT, signal_handler);

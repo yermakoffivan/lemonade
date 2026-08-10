@@ -1179,7 +1179,21 @@ if(BUILD_TESTING AND EXISTS "${MCP_CLIENT_CONFIG_TEST_SOURCE}")
     add_executable(test_mcp_client_config
         ${MCP_CLIENT_CONFIG_TEST_SOURCE}
         src/cpp/server/mcp_client.cpp
+        src/cpp/server/utils/path_utils.cpp
     )
+    if(WIN32)
+        target_sources(test_mcp_client_config PRIVATE
+            src/cpp/server/utils/platform/path_windows.cpp
+        )
+    elseif(APPLE)
+        target_sources(test_mcp_client_config PRIVATE
+            src/cpp/server/utils/platform/path_macos.cpp
+        )
+    elseif(UNIX)
+        target_sources(test_mcp_client_config PRIVATE
+            src/cpp/server/utils/platform/path_linux.cpp
+        )
+    endif()
     target_link_libraries(test_mcp_client_config PRIVATE nlohmann_json::nlohmann_json Threads::Threads lemonade-httplib)
 
     if(Python3_Interpreter_FOUND AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/test/fixtures/mock_mcp_stdio_server.py")
@@ -2767,6 +2781,32 @@ if(BUILD_TESTING AND EXISTS "${_CONFIG_MIGRATION_TEST_SRC}")
     add_executable(test_config_migration test/cpp/test_config_migration.cpp)
     target_link_libraries(test_config_migration PRIVATE lemonade-server-core)
     add_cpp_ci_test(ConfigMigrationTest CI OFF COMMAND test_config_migration)
+endif()
+
+set(_CONFIG_DIR_MIGRATION_TEST_SRC "${CMAKE_CURRENT_SOURCE_DIR}/test/cpp/test_config_dir_migration.cpp")
+if(BUILD_TESTING AND EXISTS "${_CONFIG_DIR_MIGRATION_TEST_SRC}")
+    add_executable(test_config_dir_migration
+        test/cpp/test_config_dir_migration.cpp
+        src/cpp/server/utils/path_utils.cpp
+    )
+    target_include_directories(test_config_dir_migration PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/include
+        ${CMAKE_CURRENT_BINARY_DIR}/include
+    )
+    if(WIN32)
+        target_sources(test_config_dir_migration PRIVATE
+            src/cpp/server/utils/platform/path_windows.cpp
+        )
+    elseif(APPLE)
+        target_sources(test_config_dir_migration PRIVATE
+            src/cpp/server/utils/platform/path_macos.cpp
+        )
+    elseif(UNIX)
+        target_sources(test_config_dir_migration PRIVATE
+            src/cpp/server/utils/platform/path_linux.cpp
+        )
+    endif()
+    add_cpp_ci_test(ConfigDirMigrationTest CI ON COMMAND test_config_dir_migration)
 endif()
 
 set(_CONFIG_TELEMETRY_TEST_SRC "${CMAKE_CURRENT_SOURCE_DIR}/test/cpp/test_config_telemetry.cpp")

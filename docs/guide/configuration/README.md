@@ -2,21 +2,23 @@
 
 ## Overview
 
-Lemonade Server starts automatically with the OS after installation. Configuration is managed through a single `config.json` file stored in the lemonade cache directory.
+Lemonade Server starts automatically with the OS after installation. Persistent JSON configuration is stored in Lemonade's config directory; caches and downloaded artifacts stay in the cache directory.
 
 ## config.json
 
 If you used an installer from the Lemonade release your `config.json` will be at these locations depending on your OS:
 
-- **Linux — `apt`/`.deb` (Debian/Ubuntu):** `/var/lib/lemonade/.cache/lemonade/config.json`
-- **Linux — `dnf`/`.rpm` (Fedora/Red Hat):** `/opt/var/lib/lemonade/.cache/lemonade/config.json`
+- **Linux — `apt`/`.deb` (Debian/Ubuntu):** `/var/lib/lemonade/.config/lemonade/config.json`
+- **Linux — `dnf`/`.rpm` (Fedora/Red Hat):** `/opt/var/lib/lemonade/.config/lemonade/config.json`
 
   > Note: For Debian/Ubuntu, upgrading the package automatically migrates data from the old `/opt/var/lib/lemonade` path to `/var/lib/lemonade`.
 
-- **Windows:** `%USERPROFILE%\.cache\lemonade\config.json`
-- **macOS:** `/Library/Application Support/lemonade/.cache/config.json`
+- **Windows:** `%USERPROFILE%\.config\lemonade\config.json`
+- **macOS:** `/Library/Application Support/lemonade/.config/config.json`
 
-If you are using a standalone `lemond` exectable, the default location is `~/.cache/lemonade/config.json`.
+If you are using a standalone `lemond` executable, the default location is `~/.config/lemonade/config.json`.
+
+On startup, Lemonade automatically migrates persistent JSON files from the legacy `.cache` location into the new `.config` location.
 
 > Note: If `config.json` doesn't exist, it's created automatically with default values on first run.
 
@@ -395,25 +397,26 @@ If the server won't start and CLI arguments aren't sufficient, you can edit conf
 
 ```bash
 # Linux (Debian/Ubuntu)
-sudo nano /var/lib/lemonade/.cache/lemonade/config.json
+sudo nano /var/lib/lemonade/.config/lemonade/config.json
 
 # Linux (Fedora/Red Hat)
-sudo nano /opt/var/lib/lemonade/.cache/lemonade/config.json
+sudo nano /opt/var/lib/lemonade/.config/lemonade/config.json
 
 sudo systemctl restart lemond
 
 # Windows — edit with your preferred text editor:
-# %USERPROFILE%\.cache\lemonade\config.json
+# %USERPROFILE%\.config\lemonade\config.json
 # Then quit and relaunch from the Start Menu
 ```
 
 ## lemond CLI
 
 ```
-lemond [cache_dir] [--port PORT] [--host HOST]
+lemond [cache_dir] [config_dir] [--port PORT] [--host HOST]
 ```
 
-- **cache_dir** — Path to the lemonade cache directory containing config.json and model data. Optional; defaults to platform-specific location.
+- **cache_dir** — Path to the lemonade cache/data directory. Optional; defaults to the platform-specific cache location.
+- **config_dir** — Path to the lemonade config directory for persistent JSON state. Optional; defaults to the platform-specific config location.
 - **--port** — Port to serve on (overrides config.json, persisted). Use as a fallback if the server cannot start.
 - **--host** — Address to bind (overrides config.json, persisted). Use as a fallback if the server cannot start.
 

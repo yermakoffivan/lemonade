@@ -1,8 +1,7 @@
 #include <lemon/utils/path_utils.h>
 #include <lemon/utils/path_platform.h>
-#include <lemon/utils/json_utils.h>
-#include <lemon/utils/process_manager.h>
 #include <algorithm>
+#include <array>
 #include <cctype>
 #include <filesystem>
 #include <vector>
@@ -25,6 +24,7 @@ namespace lemon::utils {
 // ---------------------------------------------------------------------------
 
 static std::string g_cache_dir;
+static std::string g_config_dir;
 static std::string g_models_dir;
 
 // Platform abstraction instance (created on first use)
@@ -35,6 +35,10 @@ static PathPlatform* platform() {
 
 void set_cache_dir(const std::string& dir) {
     g_cache_dir = dir;
+}
+
+void set_config_dir(const std::string& dir) {
+    g_config_dir = dir;
 }
 
 void set_models_dir(const std::string& dir) {
@@ -171,6 +175,52 @@ std::string get_cache_dir() {
 
     // Fallback to platform-specific defaults (for backward compat / CLI client)
     return platform()->get_cache_dir(g_cache_dir);
+}
+
+std::string get_config_dir() {
+    return path_to_utf8(path_from_utf8(platform()->get_config_dir(g_config_dir)).make_preferred());
+}
+
+void migrate_legacy_json_files_to_config_dir(const std::string& cache_dir,
+                                             const std::string& config_dir) {
+    const fs::path cache_path = path_from_utf8(cache_dir);
+    const fs::path config_path = path_from_utf8(config_dir);
+    if (cache_path == config_path) {
+        return;
+    }
+
+    std::error_code ec;
+    fs::create_directories(config_path, ec);
+    if (ec) {
+        return;
+    }
+
+    constexpr std::array<const char*, 5> kLegacyJsonFiles = {
+        "config.json",
+        "jobs.json",
+        "mcp_servers.json",
+        "recipe_options.json",
+        "user_models.json",
+    };
+    for (const char* filename : kLegacyJsonFiles) {
+        const fs::path old_path = cache_path / filename;
+        const fs::path new_path = config_path / filename;
+        if (!fs::exists(old_path) || fs::exists(new_path)) {
+            continue;
+        }
+        std::error_code move_ec;
+        fs::rename(old_path, new_path, move_ec);
+        if (!move_ec) {
+            continue;
+        }
+        std::error_code copy_ec;
+        fs::copy_file(old_path, new_path, fs::copy_options::overwrite_existing, copy_ec);
+        if (copy_ec) {
+            continue;
+        }
+        std::error_code remove_ec;
+        fs::remove(old_path, remove_ec);
+    }
 }
 
 std::string default_hf_cache_dir() {

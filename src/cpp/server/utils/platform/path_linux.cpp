@@ -39,11 +39,33 @@ public:
             return g_cache_dir;
         }
 
+        std::string xdg_cache_home = get_environment_variable_utf8("XDG_CACHE_HOME");
+        if (!xdg_cache_home.empty()) {
+            return xdg_cache_home + "/lemonade";
+        }
+
         std::string home = get_environment_variable_utf8("HOME");
         if (!home.empty()) {
             return home + "/.cache/lemonade";
         }
         throw std::runtime_error("HOME is not set; cannot resolve Lemonade cache directory");
+    }
+
+    std::string get_config_dir(const std::string& g_config_dir) override {
+        if (!g_config_dir.empty()) {
+            return g_config_dir;
+        }
+
+        std::string xdg_config_home = get_environment_variable_utf8("XDG_CONFIG_HOME");
+        if (!xdg_config_home.empty()) {
+            return xdg_config_home + "/lemonade";
+        }
+
+        std::string home = get_environment_variable_utf8("HOME");
+        if (!home.empty()) {
+            return home + "/.config/lemonade";
+        }
+        throw std::runtime_error("HOME is not set; cannot resolve Lemonade config directory");
     }
 
     std::string get_runtime_dir() override {
