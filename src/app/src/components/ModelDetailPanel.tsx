@@ -2152,25 +2152,47 @@ export const ModelDetailPanel: React.FC<ModelDetailPanelProps> = ({
           </WorkspaceActionButton>
         </>
       ) : isDownloaded ? (
-        <>
-          <WorkspaceActionButton
-            appearance="quiet"
-            icon="sliders-horizontal"
-            onClick={() => setActiveTab('config')}
-            title="Configure runtime options before loading"
-          >
-            Configure…
-          </WorkspaceActionButton>
-          <WorkspaceActionButton
-            appearance="primary"
-            icon="play"
-            onClick={() => onLoad(model)}
-            disabled={isLoadingThis}
-            aria-label={isLoadingThis ? `Loading ${name}…` : `Load ${name}`}
-          >
-            {isLoadingThis ? 'Loading…' : 'Load'}
-          </WorkspaceActionButton>
-        </>
+        isRouterCollection ? (
+          <>
+            <WorkspaceActionButton
+              appearance="quiet"
+              icon="sliders-horizontal"
+              onClick={() => setActiveTab('settings')}
+              title="Review Router policy and components"
+            >
+              Router settings
+            </WorkspaceActionButton>
+            <WorkspaceActionButton
+              appearance="primary"
+              icon="play"
+              onClick={() => onLoad(model)}
+              disabled={isLoadingThis}
+              aria-label={isLoadingThis ? `Preparing Router ${name}…` : `Use Router ${name}`}
+            >
+              {isLoadingThis ? 'Preparing…' : 'Use Router'}
+            </WorkspaceActionButton>
+          </>
+        ) : (
+          <>
+            <WorkspaceActionButton
+              appearance="quiet"
+              icon="sliders-horizontal"
+              onClick={() => setActiveTab('config')}
+              title="Configure runtime options before loading"
+            >
+              Configure…
+            </WorkspaceActionButton>
+            <WorkspaceActionButton
+              appearance="primary"
+              icon="play"
+              onClick={() => onLoad(model)}
+              disabled={isLoadingThis}
+              aria-label={isLoadingThis ? `Loading ${name}…` : `Load ${name}`}
+            >
+              {isLoadingThis ? 'Loading…' : 'Load'}
+            </WorkspaceActionButton>
+          </>
+        )
       ) : (
         <>
           <WorkspaceActionButton appearance="primary" icon="download" onClick={() => onPullAndLoad(model)} aria-label={`Get and load ${name}`}>

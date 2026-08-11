@@ -32,6 +32,7 @@ import {
   routerRecordToModelInfo,
   upsertRouterRecord,
 } from '../features/router/routerStore';
+import { preflightRouter } from '../features/router/routerRuntime';
 import {
   describeRouterModelConnection,
   providerEndpointNeedsInsecureOptIn,
@@ -373,6 +374,11 @@ export const RouterEditorPanel: React.FC<RouterEditorPanelProps> = ({
       nextRequest = buildRouterPullRequest(draft);
     } catch (buildError) {
       setError(buildError instanceof Error ? buildError.message : 'Router validation failed.');
+      return;
+    }
+    const dependencyPreflight = preflightRouter(nextRequest as any, models, []);
+    if (!dependencyPreflight.ok) {
+      setError(dependencyPreflight.errors.join(' '));
       return;
     }
     setSaving(true);

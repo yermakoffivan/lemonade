@@ -23,7 +23,8 @@ import { DEFAULT_OMNI_SYSTEM_PROMPT_TEMPLATE } from '../tools/omniTools';
 import { remoteResultAsModelInfo } from '../remoteModelCapabilities';
 import { WorkspaceActionButton, WorkspaceActionGroup, WorkspaceDetailPanel, WorkspaceMetadataChip, WorkspacePanelResizer } from './WorkspacePanels';
 import { ROUTER_RECIPE, type RouterPullRequest } from '../features/router/routerTypes';
-import { deleteRouterRecord, loadRouterRecords, routerRecordToModelInfo } from '../features/router/routerStore';
+import { ROUTER_RECORDS_CHANGED_EVENT, deleteRouterRecord, loadRouterRecords, routerRecordToModelInfo, routerRegistrationOptions } from '../features/router/routerStore';
+import { isRouterModelInfo, preflightRouter, routerPreflightError } from '../features/router/routerRuntime';
 import {
   GLOBAL_MODEL_SETTINGS_EVENT,
   automaticUpdateIsDue,
@@ -1194,6 +1195,12 @@ const ModelManager: React.FC<ModelManagerProps> = ({ onModelSelect, openModelReq
 
   useEffect(() => { reloadRouterModels(); }, [reloadRouterModels]);
 
+  useEffect(() => {
+    const handleRouterRecordsChanged = () => reloadRouterModels();
+    window.addEventListener(ROUTER_RECORDS_CHANGED_EVENT, handleRouterRecordsChanged);
+    return () => window.removeEventListener(ROUTER_RECORDS_CHANGED_EVENT, handleRouterRecordsChanged);
+  }, [reloadRouterModels]);
+
 
   useEffect(() => {
     setPinnedModels(loadPinnedModelNames());
@@ -1597,6 +1604,17 @@ const ModelManager: React.FC<ModelManagerProps> = ({ onModelSelect, openModelReq
     visited.add(key);
 
     const info = typeof target === 'string' ? findCurrentModel(name) : target;
+    if (isRouterModelInfo(info)) {
+      const registration = routerRegistrationOptions(info);
+      if (!registration) throw new Error(`Router ${name} is incomplete and cannot be registered.`);
+      await api.registerModelDefinition(name, registration);
+      const fresh = await api.models(true);
+      const health = await api.health().catch(() => null);
+      const preflight = preflightRouter(info, fresh.data, health?.all_models_loaded || []);
+      if (!preflight.ok) throw new Error(routerPreflightError(preflight));
+      visited.delete(key);
+      return;
+    }
     const components = info && isCollectionModel(info) ? getCollectionComponents(info) : [];
 
     if (components.length > 0) {
@@ -1647,7 +1665,17 @@ const ModelManager: React.FC<ModelManagerProps> = ({ onModelSelect, openModelReq
     setLoadError(null);
     setLoadingModel(name);
     try {
-      await loadWithGlobalPolicy(model);
+      if (isRouterModelInfo(model)) {
+        const registration = routerRegistrationOptions(model);
+        if (!registration) throw new Error('Router definition is incomplete and cannot be registered.');
+        await api.registerModelDefinition(name, registration);
+        const fresh = await api.models(true);
+        const health = await api.health().catch(() => null);
+        const preflight = preflightRouter(model, fresh.data, health?.all_models_loaded || []);
+        if (!preflight.ok) throw new Error(routerPreflightError(preflight));
+      } else {
+        await loadWithGlobalPolicy(model);
+      }
       await refresh();
       onModelSelect(name);
     } catch (err) {
@@ -1699,7 +1727,17 @@ const ModelManager: React.FC<ModelManagerProps> = ({ onModelSelect, openModelReq
     setLoadError(null);
     setLoadingModel(name);
     try {
-      await loadWithGlobalPolicy(model, recipeOptions);
+      if (isRouterModelInfo(model)) {
+        const registration = routerRegistrationOptions(model);
+        if (!registration) throw new Error('Router definition is incomplete and cannot be registered.');
+        await api.registerModelDefinition(name, registration);
+        const fresh = await api.models(true);
+        const health = await api.health().catch(() => null);
+        const preflight = preflightRouter(model, fresh.data, health?.all_models_loaded || []);
+        if (!preflight.ok) throw new Error(routerPreflightError(preflight));
+      } else {
+        await loadWithGlobalPolicy(model, recipeOptions);
+      }
       await refresh();
       onModelSelect(name);
     } catch (err) {
@@ -1712,7 +1750,11 @@ const ModelManager: React.FC<ModelManagerProps> = ({ onModelSelect, openModelReq
   };
 
   const handleDeleteRouterDefinition = async (name: string): Promise<void> => {
-    if (api.isConnected) await api.deleteModel(name);
+    if (api.isConnected) {
+      const serverModels = await api.models(true).catch(() => ({ data: [] as ModelInfo[] }));
+      const serverHasRouter = serverModels.data.some(model => modelName(model).toLowerCase() === name.toLowerCase());
+      if (serverHasRouter) await api.deleteModel(name);
+    }
     deleteRouterRecord(name);
     reloadRouterModels();
     if (selectedDetailModelId === name) setSelectedDetailModelId(null);

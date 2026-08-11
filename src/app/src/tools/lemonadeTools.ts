@@ -4,6 +4,8 @@
  */
 import api, { searchHuggingFace, HFModelResult, PullVariantsResult } from '../api';
 import { getCollectionComponents, isCollectionModel } from '../features/collections/collectionModels';
+import { deleteRouterRecord, loadRouterRecords, routerRecordToModelInfo, routerRegistrationOptions } from '../features/router/routerStore';
+import { preflightRouter, routerPreflightError } from '../features/router/routerRuntime';
 
 /* ── Tool schemas (OpenAI function calling format) ─────────────── */
 
@@ -27,7 +29,7 @@ export const LEMONADE_TOOLS: ToolFunction[] = [
         properties: {
           query: { type: 'string', description: 'Optional case-insensitive model-name filter. Use when the user mentions a model family/name such as Flux, Gemma, Qwen, Llama, Whisper, or SD.' },
           status: { type: 'string', enum: ['local', 'loaded', 'downloaded', 'registry', 'all'], description: 'Which models to return. Default: local. Use registry/all only when the user explicitly asks what can be downloaded.' },
-          capability: { type: 'string', description: 'Optional capability filter: chat, image, audio/transcription, audio-generation, tts, model3d, embedding, reranking, omni.' },
+          capability: { type: 'string', description: 'Optional capability/mode filter: chat, router, image, audio/transcription, audio-generation, tts, model3d, embedding, reranking, omni. Router models are chat-capable but can be selected explicitly with router.' },
           limit: { type: 'number', description: 'Maximum returned items per section. Default 30.' },
         },
         required: [],
@@ -38,7 +40,7 @@ export const LEMONADE_TOOLS: ToolFunction[] = [
     type: 'function',
     function: {
       name: 'get_model_info',
-      description: 'Get detailed info about one specific model: downloaded state, labels/capability, size, context window, checkpoint, and available recipes/backends. Use this for any user question about a named model and before load_model when recipe/device is unclear. Do not answer a named-model question from list_models alone.',
+      description: 'Get detailed info about one specific model: downloaded state, labels/capability, size, context window, checkpoint, available recipes/backends, and Router routing metadata when recipe=collection.router. Use this for any user question about a named model and before load_model when recipe/device is unclear. Do not answer a named-model question from list_models alone.',
       parameters: {
         type: 'object',
         properties: {
@@ -52,7 +54,7 @@ export const LEMONADE_TOOLS: ToolFunction[] = [
     type: 'function',
     function: {
       name: 'load_model',
-      description: 'Load a downloaded/local model into the server for inference. A recipe defines the inference backend: llamacpp (GPU/CPU via llama.cpp — backends: vulkan, rocm, metal, cpu), flm (NPU via FastFlowLM), ryzenai-llm (hybrid NPU). Combined forms like "llamacpp-vulkan" or "llamacpp-cpu" select a backend. If the user asks for CPU, pass backend/device=cpu. If multiple recipes are available and the user did not choose, call get_model_info and ask_question first.',
+      description: 'Load a downloaded/local model into the server for inference. A recipe defines the inference backend: llamacpp (GPU/CPU via llama.cpp — backends: vulkan, rocm, metal, cpu), flm (NPU via FastFlowLM), ryzenai-llm (hybrid NPU). Combined forms like "llamacpp-vulkan" or "llamacpp-cpu" select a backend. Router models (recipe=collection.router) are virtual orchestration policies: load_model validates/registers them for use but never starts a backend process for the Router itself. Do not assign a backend/device to the Router. If the user asks for CPU, pass backend/device=cpu for ordinary models. If multiple recipes are available and the user did not choose, call get_model_info and ask_question first.',
       parameters: {
         type: 'object',
         properties: {
@@ -101,7 +103,7 @@ export const LEMONADE_TOOLS: ToolFunction[] = [
     type: 'function',
     function: {
       name: 'pull_model',
-      description: 'Download a model to local storage. First try Lemonade registry names; if no registry match exists, this tool can search Hugging Face GGUF checkpoints and download one when a checkpoint/variant is specified or one clear option exists. Use ask_question if several registry or Hugging Face variants are returned as choices. Models must be pulled before load_model can run.',
+      description: 'Download a model artifact to local storage. First try Lemonade registry names; if no registry match exists, this tool can search Hugging Face GGUF checkpoints and download one when a checkpoint/variant is specified or one clear option exists. Router definitions (recipe=collection.router) are registered configurations, not downloadable model artifacts, so inspect them with get_model_info instead. Use ask_question if several registry or Hugging Face variants are returned as choices. Models must be pulled before load_model can run.',
       parameters: {
         type: 'object',
         properties: {
@@ -120,7 +122,7 @@ export const LEMONADE_TOOLS: ToolFunction[] = [
     type: 'function',
     function: {
       name: 'delete_model',
-      description: 'Delete a downloaded model from local storage, freeing disk space.',
+      description: 'Delete a downloaded model from local storage, freeing disk space. For collection types like Router only registered definition is removed.',
       parameters: {
         type: 'object',
         properties: {
@@ -227,6 +229,43 @@ function lowerLabels(model: AnyModel | null | undefined): string[] {
   return Array.isArray(model?.labels) ? model.labels.map((label: unknown) => String(label).toLowerCase()) : [];
 }
 
+function isRouterModel(model: AnyModel | null | undefined): boolean {
+  if (!model) return false;
+  const recipe = asString(model.recipe).toLowerCase();
+  return recipe === 'collection.router' || recipe.startsWith('collection.router.');
+}
+
+function withLocalRouterModels(models: AnyModel[]): AnyModel[] {
+  const localRouters = loadRouterRecords().map(record => routerRecordToModelInfo(record) as AnyModel);
+  if (localRouters.length === 0) return models;
+  const seen = new Set<string>();
+  const merged: AnyModel[] = [];
+  for (const model of [...localRouters, ...models]) {
+    const key = modelName(model).toLowerCase();
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    merged.push(model);
+  }
+  return merged;
+}
+
+function routerRoutingSummary(model: AnyModel | null | undefined): Record<string, unknown> | undefined {
+  if (!isRouterModel(model) || !model?.routing || typeof model.routing !== 'object' || Array.isArray(model.routing)) return undefined;
+  const routing = model.routing as Record<string, any>;
+  const candidates = Array.isArray(routing.candidates) ? routing.candidates.map((item: unknown) => String(item)).filter(Boolean) : [];
+  const llmRouter = routing.router && typeof routing.router === 'object' && !Array.isArray(routing.router)
+    ? routing.router as Record<string, unknown>
+    : null;
+  return {
+    mode: llmRouter ? 'llm' : 'rules',
+    candidates,
+    default_model: asString(routing.default_model) || undefined,
+    llm_router_model: llmRouter ? asString(llmRouter.model) || undefined : undefined,
+    classifier_count: Array.isArray(routing.classifiers) ? routing.classifiers.length : 0,
+    rule_count: Array.isArray(routing.rules) ? routing.rules.length : 0,
+  };
+}
+
 function isDownloaded(model: AnyModel | null | undefined): boolean {
   if (!model) return false;
   if (model.downloaded === true) return true;
@@ -252,6 +291,7 @@ function recipeNames(model: AnyModel | null | undefined): string[] {
 
 function normalizeCapabilityFilter(value: unknown): string {
   const raw = asString(value).toLowerCase();
+  if (['router', 'routing'].includes(raw)) return 'router';
   if (['audio/transcription', 'transcription', 'stt', 'asr', 'speech-to-text'].includes(raw)) return 'audio';
   if (['music', 'sfx', 'music-and-sfx', 'music & sfx', 'audio_generation'].includes(raw)) return 'audio-generation';
   if (['3d', '3d-generation', 'image-to-3d'].includes(raw)) return 'model3d';
@@ -266,6 +306,9 @@ function capabilityForModel(model: AnyModel | null | undefined): string {
   const name = modelName(model).toLowerCase();
   const haystack = `${type} ${labels.join(' ')} ${recipe} ${name}`;
 
+  // Keep Router aligned with the app-wide model capability contract:
+  // collection.router is a Chat mode orchestration model, not Omni.
+  if (isRouterModel(model)) return 'chat';
   if (haystack.includes('omni') || haystack.includes('collection')) return 'omni';
   if (['trellis', 'image-to-3d', '3d-generation', 'model3d'].some(token => haystack.includes(token)) || type === '3d') return 'model3d';
   if (['acestep', 'ace-step', 'thinksound', 'audio-generation', 'music-generation', 'sound-generation', 'sfx'].some(token => haystack.includes(token))) return 'audio-generation';
@@ -291,6 +334,7 @@ function modelSummary(model: AnyModel, loaded?: AnyLoadedModel | null): Record<s
     name: displayName(model),
     status: loaded ? 'loaded' : (isDownloaded(model) ? 'downloaded' : 'registry'),
     capability: capabilityForModel(model),
+    mode: isRouterModel(model) ? 'router' : undefined,
     size: formatSize(model.size) || model.size,
     recipe: asString(model.recipe) || undefined,
     recipes: recipeNames(model),
@@ -570,17 +614,18 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
         const status = (asString(args.status) || 'local').toLowerCase();
         const capability = normalizeCapabilityFilter(args.capability);
         const limit = Math.max(1, Math.min(100, Math.round(asNumber(args.limit) || 30)));
-        const all = (data.data as AnyModel[]).filter(model => {
-          if (!includesQuery(model, query)) return false;
-          if (capability && capabilityForModel(model) !== capability) return false;
-          return true;
-        });
+        const registryModels = withLocalRouterModels(data.data as AnyModel[]);
+        const matchesCapability = (model: AnyModel): boolean => !capability
+          || (capability === 'router' ? isRouterModel(model) : capabilityForModel(model) === capability);
+        const all = registryModels.filter(model => includesQuery(model, query) && matchesCapability(model));
         const loadedItems = loaded
-          .filter(model => !query || asString(model.model_name).toLowerCase().includes(query.toLowerCase()))
           .map(model => {
-            const registry = all.find(info => modelName(info).toLowerCase() === asString(model.model_name).toLowerCase());
-            return modelSummary(registry || { id: model.model_name, name: model.model_name, recipe: model.recipe, type: model.type }, model);
-          });
+            const registry = registryModels.find(info => modelName(info).toLowerCase() === asString(model.model_name).toLowerCase());
+            const info = registry || { id: model.model_name, name: model.model_name, recipe: model.recipe, type: model.type };
+            return { model, info };
+          })
+          .filter(({ info }) => includesQuery(info, query) && matchesCapability(info))
+          .map(({ model, info }) => modelSummary(info, model));
         const downloaded = all.filter(model => !loadedNames.has(modelName(model).toLowerCase()) && isDownloaded(model)).map(model => modelSummary(model));
         const registry = all.filter(model => !loadedNames.has(modelName(model).toLowerCase()) && !isDownloaded(model)).map(model => modelSummary(model));
         const wanted = status === 'loaded' ? { loaded: loadedItems.slice(0, limit) }
@@ -593,7 +638,7 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
           query: query || undefined,
           capability: capability || undefined,
           counts: {
-            total_registry_known: data.data.length,
+            total_registry_known: registryModels.length,
             matching_total: all.length,
             loaded: loadedItems.length,
             downloaded: downloaded.length,
@@ -616,10 +661,11 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
         const data = await api.models(true);
         const health = await api.health().catch(() => null);
         const loaded = health?.all_models_loaded || [];
-        const resolved = resolveModel(data.data as AnyModel[], loaded, args.model_name);
+        const registryModels = withLocalRouterModels(data.data as AnyModel[]);
+        const resolved = resolveModel(registryModels, loaded, args.model_name);
         if (!resolved) {
           const requested = asString(args.model_name);
-          const matches = registryMatches(data.data as AnyModel[], loaded, requested).slice(0, 8);
+          const matches = registryMatches(registryModels, loaded, requested).slice(0, 8);
           const result = {
             error: `Model not found: ${requested || '(missing model_name)'}`,
             suggestions: matches.map(model => modelSummary(model, loadedFor(model, loaded))),
@@ -627,13 +673,13 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
           };
           return toolPayload(call, result, matches.length ? `Model not found exactly. Suggestions:\n${modelChoiceLines(matches, loaded).join('\n')}` : 'Model not found', true);
         }
-        const detail = await api.modelDetail(modelName(resolved)).catch(() => resolved);
+        const detail = await api.modelDetail(modelName(resolved)).catch(() => resolved) || resolved;
         const loadedItem = loadedFor(resolved, loaded);
         const summary = modelSummary(detail as AnyModel, loadedItem);
         const detailComponentNames = getCollectionComponents(detail as any);
         const componentNames = detailComponentNames.length > 0 ? detailComponentNames : getCollectionComponents(resolved as any);
         const componentSummaries: Array<Record<string, unknown>> = await Promise.all(componentNames.map(async componentName => {
-          const component = resolveModel(data.data as AnyModel[], loaded, componentName);
+          const component = resolveModel(registryModels, loaded, componentName);
           const componentLoaded = component
             ? loadedFor(component, loaded)
             : loaded.find(item => asString(item.model_name).toLowerCase() === componentName.toLowerCase()) || null;
@@ -647,6 +693,10 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
           };
         }));
         const componentCapabilities = Array.from(new Set(componentSummaries.map(component => String(component.capability || '')).filter(Boolean)));
+        const routerModel = isRouterModel(detail as AnyModel) || isRouterModel(resolved);
+        const router = routerRoutingSummary(detail as AnyModel) || routerRoutingSummary(resolved);
+        const routerSource = isRouterModel(detail as AnyModel) && (detail as AnyModel).routing ? detail : resolved;
+        const routerPreflight = routerModel ? preflightRouter(routerSource as any, registryModels as any, loaded as any) : undefined;
         const result = {
           ...summary,
           raw_name: modelName(detail as AnyModel),
@@ -655,12 +705,17 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
           checkpoint: (detail as AnyModel).checkpoint,
           context_window: (detail as AnyModel).max_context_window || (detail as AnyModel).context_length || (detail as AnyModel).n_ctx,
           recipe_options: extractRecipeBackendOptions(detail as AnyModel),
+          is_router: Boolean(routerModel),
+          router,
+          router_preflight: routerPreflight,
           is_collection: isCollectionModel(detail as any) || componentSummaries.length > 0,
           collection_components: componentSummaries.length > 0 ? componentSummaries : undefined,
           collection_capabilities: componentCapabilities.length > 0 ? componentCapabilities : undefined,
-          answer_instruction: componentSummaries.length > 0
-            ? 'Answer the user with the collection status and list every involved component model with each component capability/status. If they asked to load it, call load_model next.'
-            : 'Answer the user with the model status, capability, size/context, checkpoint, and recipe/backend options. If they asked to load it, call load_model next.',
+          answer_instruction: routerModel
+            ? 'Answer that this is a Router (chat orchestration model). Include routing mode, default model, candidates, and involved component statuses. Do not describe the Router itself as an Omni model or assign it a hardware backend. If they asked to load it, call load_model next.'
+            : componentSummaries.length > 0
+              ? 'Answer the user with the collection status and list every involved component model with each component capability/status. If they asked to load it, call load_model next.'
+              : 'Answer the user with the model status, capability, size/context, checkpoint, and recipe/backend options. If they asked to load it, call load_model next.',
         };
         const display = [
           `${summary.name || summary.id} — ${summary.status}, ${summary.capability}`,
@@ -668,6 +723,8 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
           result.context_window ? `Context: ${result.context_window}` : '',
           result.checkpoint ? `Checkpoint: ${result.checkpoint}` : '',
           Array.isArray(summary.recipes) && summary.recipes.length ? `Recipes: ${summary.recipes.join(', ')}` : '',
+          router ? `Router: ${router.mode}${router.default_model ? ` · default ${router.default_model}` : ''}` : '',
+          routerPreflight && !routerPreflight.ok ? `Router preflight: BLOCKED · ${routerPreflight.errors.join(' ')}` : (routerPreflight ? `Router preflight: ready${routerPreflight.warnings.length ? ` · ${routerPreflight.warnings.length} warning(s)` : ''}` : ''),
           componentSummaries.length ? `Components:\n${componentSummaries.map(component => `- ${component.name || component.id} — ${component.status}, ${component.capability}`).join('\n')}` : '',
         ].filter(Boolean).join('\n');
         return toolPayload(call, result, display || 'Model info retrieved');
@@ -677,27 +734,67 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
         const data = await api.models(true).catch(() => ({ data: [] as AnyModel[] }));
         const health = await api.health().catch(() => null);
         const loaded = health?.all_models_loaded || [];
-        const resolved = resolveModel(data.data as AnyModel[], loaded, args.model_name);
+        const registryModels = withLocalRouterModels(data.data as AnyModel[]);
+        const resolved = resolveModel(registryModels, loaded, args.model_name);
         const targetModelName = resolved ? modelName(resolved) : asString(args.model_name);
         if (!targetModelName) {
           return toolPayload(call, { error: 'Missing model_name. Use list_models with a query to resolve a downloaded model first.' }, 'Error: missing model name', true);
         }
+        if (isRouterModel(resolved)) {
+          const serverHasRouter = (data.data as AnyModel[]).some(model => modelName(model).toLowerCase() === targetModelName.toLowerCase());
+          if (!serverHasRouter) {
+            const registration = routerRegistrationOptions(resolved as any);
+            if (!registration) {
+              return toolPayload(call, { error: 'Router definition is incomplete and cannot be registered.', model: targetModelName, mode: 'router' }, 'Router definition is incomplete', true);
+            }
+            await api.registerModelDefinition(targetModelName, registration);
+          }
+          const fresh = await api.models(true).catch(() => data);
+          const available = withLocalRouterModels(fresh.data as AnyModel[]);
+          const preflight = preflightRouter(resolved as any, available as any, loaded as any);
+          if (!preflight.ok) {
+            const message = routerPreflightError(preflight);
+            return toolPayload(call, { error: message, status: 'blocked', model: targetModelName, mode: 'router', dependencies: preflight.dependencies, warnings: preflight.warnings }, message, true);
+          }
+          const ignored = (args.recipe || args.backend || args.device || args.n_ctx || args.n_gpu_layers)
+            ? { recipe: args.recipe, backend: args.backend || args.device, n_ctx: args.n_ctx, n_gpu_layers: args.n_gpu_layers }
+            : undefined;
+          return toolPayload(call, {
+            status: 'ready',
+            model: targetModelName,
+            mode: 'router',
+            virtual: true,
+            dependencies: preflight.dependencies,
+            warnings: preflight.warnings,
+            ignored_router_options: ignored,
+            answer_instruction: 'Tell the user the Router is registered and ready. It is a virtual policy and is invoked by using its model name in chat; no Router backend process was loaded. If a routed request later fails, inspect the named candidate/classifier/helper model.',
+          }, `Router ${targetModelName} is ready`);
+        }
+
         const opts: Record<string, unknown> = {};
+        const routerModel = isRouterModel(resolved);
         const recipeArg = typeof args.recipe === 'string' ? args.recipe.trim().toLowerCase() : '';
         const backendArg = typeof args.backend === 'string' ? args.backend.trim().toLowerCase()
           : (typeof args.device === 'string' ? args.device.trim().toLowerCase() : '');
         let recipe = recipeArg === 'sd_cpp' ? 'sd-cpp' : recipeArg === 'ryzenai_llm' ? 'ryzenai-llm' : recipeArg;
         let backend = backendArg;
 
-        const llamacppMatch = /^llamacpp[-_:](cpu|vulkan|rocm|metal|cuda|gpu)$/i.exec(recipeArg);
+        // Router is an orchestration recipe. Backend/device/context tuning belongs
+        // to the candidate models selected by the Router, not to the Router itself.
+        if (routerModel) {
+          recipe = '';
+          backend = '';
+        }
+
+        const llamacppMatch = !routerModel ? /^llamacpp[-_:](cpu|vulkan|rocm|metal|cuda|gpu)$/i.exec(recipeArg) : null;
         if (llamacppMatch) {
           recipe = 'llamacpp';
           backend = llamacppMatch[1].toLowerCase();
         }
-        if (backend === 'gpu' && (!recipe || recipe === 'llamacpp')) backend = 'vulkan';
+        if (!routerModel && backend === 'gpu' && (!recipe || recipe === 'llamacpp')) backend = 'vulkan';
 
-        if (recipe) opts.recipe = recipe;
-        if (backend) {
+        if (!routerModel && recipe) opts.recipe = recipe;
+        if (!routerModel && backend) {
           if (recipe === 'llamacpp' || !recipe) {
             opts.llamacpp_backend = backend;
             if (backend === 'cpu') opts.llamacpp_device = 'cpu';
@@ -719,21 +816,37 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
             opts.trellis_backend = backend;
           }
         }
-        if (args.n_ctx) opts.n_ctx = args.n_ctx;
-        if (args.n_gpu_layers) opts.n_gpu_layers = args.n_gpu_layers;
+        if (!routerModel && args.n_ctx) opts.n_ctx = args.n_ctx;
+        if (!routerModel && args.n_gpu_layers) opts.n_gpu_layers = args.n_gpu_layers;
         const response = await api.loadModel(targetModelName, Object.keys(opts).length > 0 ? opts : undefined, resolved as any || null);
         const result = {
           status: 'loaded',
           model: targetModelName,
+          mode: routerModel ? 'router' : undefined,
           options: opts,
+          ignored_router_options: routerModel && (recipeArg || backendArg || args.n_ctx || args.n_gpu_layers)
+            ? { recipe: recipeArg || undefined, backend: backendArg || undefined, n_ctx: args.n_ctx, n_gpu_layers: args.n_gpu_layers }
+            : undefined,
           response,
-          answer_instruction: 'Tell the user the model was loaded, including the model name and selected recipe/backend if any.',
+          answer_instruction: routerModel
+            ? 'Tell the user the Router was loaded/selected. Explain that backend/device options do not apply to the Router itself; routing chooses candidate models per request.'
+            : 'Tell the user the model was loaded, including the model name and selected recipe/backend if any.',
         };
-        return toolPayload(call, result, `Loaded ${targetModelName}${Object.keys(opts).length ? ` with ${shortJson(opts, 120)}` : ''}`);
+        return toolPayload(call, result, routerModel
+          ? `Loaded Router ${targetModelName}`
+          : `Loaded ${targetModelName}${Object.keys(opts).length ? ` with ${shortJson(opts, 120)}` : ''}`);
       }
 
       case 'unload_model': {
         const requested = asString(args.model_name) || undefined;
+        if (requested) {
+          const data = await api.models(true).catch(() => ({ data: [] as AnyModel[] }));
+          const resolved = resolveModel(withLocalRouterModels(data.data as AnyModel[]), [], requested);
+          if (isRouterModel(resolved)) {
+            const result = { status: 'not_applicable', model: requested, mode: 'router', virtual: true, answer_instruction: 'Explain that a Router is a virtual routing policy and has no backend process of its own to unload. Candidate models may be unloaded separately.' };
+            return toolPayload(call, result, `Router ${requested} has no runtime process to unload`);
+          }
+        }
         const response = await api.unloadModel(requested);
         const result = { status: 'unloaded', model: requested || 'most recently used model', response, answer_instruction: 'Tell the user which model was unloaded.' };
         return toolPayload(call, result, `Unloaded ${requested || 'most recently used model'}`);
@@ -746,11 +859,12 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
           recipe: m.recipe,
           device: m.device,
           type: m.type,
+          mode: isRouterModel(m as AnyModel) ? 'router' : undefined,
         }));
         const result = {
           loaded,
           limits: health.max_models,
-          answer_instruction: 'List the currently loaded model names with recipe/device/type. If none are loaded, say none are loaded.',
+          answer_instruction: 'List the currently loaded model names with recipe/device/type. Identify recipe=collection.router entries as Router mode and do not imply the Router itself has a hardware backend. If none are loaded, say none are loaded.',
         };
         const display = loaded.length
           ? loaded.map(m => `${m.model} — ${m.recipe || 'recipe unknown'}${m.device ? ` on ${m.device}` : ''} (${m.type || 'type unknown'})`).join('\n')
@@ -764,7 +878,7 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
           status: h.status,
           version: h.version,
           loaded_models: h.all_models_loaded.length,
-          loaded: h.all_models_loaded.map(m => ({ model: m.model_name, recipe: m.recipe, device: m.device, type: m.type })),
+          loaded: h.all_models_loaded.map(m => ({ model: m.model_name, recipe: m.recipe, device: m.device, type: m.type, mode: isRouterModel(m as AnyModel) ? 'router' : undefined })),
           max_models: h.max_models,
           answer_instruction: 'Summarize server status/version, loaded model count/names, and resource limits.',
         };
@@ -834,7 +948,8 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
         const data = await api.models(true);
         const health = await api.health().catch(() => null);
         const loaded = health?.all_models_loaded || [];
-        const matches = registryMatches(data.data as AnyModel[], loaded, requested || query);
+        const registryModels = withLocalRouterModels(data.data as AnyModel[]);
+        const matches = registryMatches(registryModels, loaded, requested || query);
         if (matches.length > 1) {
           const choices = matches.slice(0, 8).map(model => modelName(model));
           const result = {
@@ -849,6 +964,15 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
         }
         if (matches.length === 1) {
           const target = modelName(matches[0]);
+          if (isRouterModel(matches[0])) {
+            const result = {
+              error: `${target} is a registered Router definition, not a downloadable model artifact.`,
+              model: target,
+              mode: 'router',
+              answer_instruction: 'Tell the user this Router is already a registered configuration. Use get_model_info to inspect it or load_model to use it; do not try to download it.',
+            };
+            return toolPayload(call, result, `${target} is a Router definition; nothing to download.`, true);
+          }
           const pullResult = await pullWithProgress(target);
           const result = {
             status: 'downloaded',
@@ -880,9 +1004,27 @@ export async function executeTool(call: ToolCall): Promise<ToolResult> {
       case 'delete_model': {
         const requested = asString(args.model_name);
         if (!requested) return toolPayload(call, { error: 'Missing model_name.' }, 'Error: missing model name', true);
-        const response = await api.deleteModel(requested);
-        const result = { status: 'deleted', model: requested, response, answer_instruction: 'Tell the user the model was deleted from local storage.' };
-        return toolPayload(call, result, `Deleted ${requested}`);
+        const localRouter = loadRouterRecords().some(record => record.model_name.toLowerCase() === requested.toLowerCase());
+        let response: unknown;
+        if (localRouter) {
+          const serverModels = await api.models(true).catch(() => ({ data: [] as AnyModel[] }));
+          const serverHasRouter = (serverModels.data as AnyModel[]).some(model => modelName(model).toLowerCase() === requested.toLowerCase());
+          response = serverHasRouter ? await api.deleteModel(requested) : { status: 'not_present_on_server' };
+          if (typeof localStorage !== 'undefined') deleteRouterRecord(requested);
+        } else {
+          response = await api.deleteModel(requested);
+        }
+        const result = {
+          status: 'deleted',
+          model: requested,
+          mode: localRouter ? 'router' : undefined,
+          local_router_record_deleted: localRouter || undefined,
+          response,
+          answer_instruction: localRouter
+            ? 'Tell the user the Router definition was deleted from the server and removed from the local Router editor state.'
+            : 'Tell the user the model was deleted from local storage.',
+        };
+        return toolPayload(call, result, `Deleted ${localRouter ? 'Router ' : ''}${requested}`);
       }
 
       case 'get_system_info': {

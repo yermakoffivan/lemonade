@@ -10,6 +10,7 @@ import {
 } from './routerTypes';
 
 const ROUTER_STORE_KEY = 'router_collections';
+export const ROUTER_RECORDS_CHANGED_EVENT = 'lemonade:router-records-changed';
 
 export interface RouterRecord {
   model_name: string;
@@ -43,6 +44,9 @@ export function loadRouterRecords(): RouterRecord[] {
 
 function saveRouterRecords(records: RouterRecord[]): void {
   localStorage.setItem(storageKey(ROUTER_STORE_KEY), JSON.stringify({ version: 1, routers: records }));
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new Event(ROUTER_RECORDS_CHANGED_EVENT));
+  }
 }
 
 export function upsertRouterRecord(draft: RouterDraft): RouterRecord {
