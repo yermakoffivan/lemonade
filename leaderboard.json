@@ -1,11 +1,12 @@
 {
-  "generated_at": "2026-08-11T08:28:00.124244+00:00",
-  "run_id": "31448414661",
-  "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661",
-  "repo": "lemonade-sdk/lemonade",
-  "repo_url": "https://github.com/lemonade-sdk/lemonade",
-  "actions_url": "https://github.com/lemonade-sdk/lemonade/actions/workflows/benchmark-regression.yml",
-  "commit": "6e48f24b071e8258c5f52a51fe2c71098d7c955b",
+  "generated_at": "2026-08-20T03:07:12.139530+00:00",
+  "run_id": "31923207191",
+  "run_url": "https://github.com/yermakoffivan/lemonade/actions/runs/31923207191",
+  "repo": "yermakoffivan/lemonade",
+  "repo_url": "https://github.com/yermakoffivan/lemonade",
+  "actions_url": "https://github.com/yermakoffivan/lemonade/actions/workflows/benchmark-regression.yml",
+  "commit": "fefef704284e24aaad0efa861b0b33bb77bbbd03",
+  "lemonade_version": null,
   "by_model_scenario": {
     "Gemma-4-26B-A4B-it-GGUF|chat-short": [
       {
@@ -20,6 +21,7 @@
         "tps_mean": 52.64,
         "tps_p95": 53.84,
         "ttft_ms_mean": 227.67,
+        "input_tokens": 30,
         "vram_peak_gb": 18.95322036743164,
         "timestamp": "2026-08-10T23:38:59Z",
         "run_id": "31448414661",
@@ -38,6 +40,7 @@
         "tps_mean": 50.07,
         "tps_p95": 50.15,
         "ttft_ms_mean": 158.74,
+        "input_tokens": 30,
         "vram_peak_gb": 18.473098754882812,
         "timestamp": "2026-08-10T22:16:16Z",
         "run_id": "31448414661",
@@ -56,6 +59,7 @@
         "tps_mean": 44.34,
         "tps_p95": 48.71,
         "ttft_ms_mean": 201.96,
+        "input_tokens": 30,
         "vram_peak_gb": 18.459693908691406,
         "timestamp": "2026-08-10T18:27:00Z",
         "run_id": "31448414661",
@@ -74,6 +78,7 @@
         "tps_mean": 43.41,
         "tps_p95": 48.55,
         "ttft_ms_mean": 192.48,
+        "input_tokens": 30,
         "vram_peak_gb": 18.448909759521484,
         "timestamp": "2026-08-10T20:32:21Z",
         "run_id": "31448414661",
@@ -94,6 +99,7 @@
         "tps_mean": 51.5,
         "tps_p95": 51.99,
         "ttft_ms_mean": 255.64,
+        "input_tokens": 37,
         "vram_peak_gb": 18.953170776367188,
         "timestamp": "2026-08-10T23:38:59Z",
         "run_id": "31448414661",
@@ -112,6 +118,7 @@
         "tps_mean": 49.95,
         "tps_p95": 49.98,
         "ttft_ms_mean": 172.52,
+        "input_tokens": 37,
         "vram_peak_gb": 18.481201171875,
         "timestamp": "2026-08-10T22:16:16Z",
         "run_id": "31448414661",
@@ -130,6 +137,7 @@
         "tps_mean": 45.21,
         "tps_p95": 46.44,
         "ttft_ms_mean": 205.28,
+        "input_tokens": 37,
         "vram_peak_gb": 18.46582794189453,
         "timestamp": "2026-08-10T20:32:21Z",
         "run_id": "31448414661",
@@ -148,6 +156,7 @@
         "tps_mean": 42.04,
         "tps_p95": 48.37,
         "ttft_ms_mean": 228.18,
+        "input_tokens": 37,
         "vram_peak_gb": 18.475997924804688,
         "timestamp": "2026-08-10T18:27:00Z",
         "run_id": "31448414661",
@@ -168,6 +177,7 @@
         "tps_mean": 81.0,
         "tps_p95": 81.69,
         "ttft_ms_mean": 228.02,
+        "input_tokens": 30,
         "vram_peak_gb": 19.75741958618164,
         "timestamp": "2026-08-10T23:46:03Z",
         "run_id": "31448414661",
@@ -186,6 +196,7 @@
         "tps_mean": 77.38,
         "tps_p95": 77.6,
         "ttft_ms_mean": 214.61,
+        "input_tokens": 30,
         "vram_peak_gb": 18.93523406982422,
         "timestamp": "2026-08-10T18:31:23Z",
         "run_id": "31448414661",
@@ -204,6 +215,7 @@
         "tps_mean": 77.38,
         "tps_p95": 77.48,
         "ttft_ms_mean": 204.63,
+        "input_tokens": 30,
         "vram_peak_gb": 18.926387786865234,
         "timestamp": "2026-08-10T20:40:50Z",
         "run_id": "31448414661",
@@ -222,6 +234,7 @@
         "tps_mean": 75.01,
         "tps_p95": 75.12,
         "ttft_ms_mean": 160.77,
+        "input_tokens": 30,
         "vram_peak_gb": 18.959335327148438,
         "timestamp": "2026-08-10T22:18:48Z",
         "run_id": "31448414661",
@@ -242,6 +255,7 @@
         "tps_mean": 93.12,
         "tps_p95": 93.75,
         "ttft_ms_mean": 256.76,
+        "input_tokens": 37,
         "vram_peak_gb": 19.757381439208984,
         "timestamp": "2026-08-10T23:46:03Z",
         "run_id": "31448414661",
@@ -260,6 +274,7 @@
         "tps_mean": 87.56,
         "tps_p95": 87.68,
         "ttft_ms_mean": 175.0,
+        "input_tokens": 37,
         "vram_peak_gb": 18.966331481933594,
         "timestamp": "2026-08-10T22:18:48Z",
         "run_id": "31448414661",
@@ -278,6 +293,7 @@
         "tps_mean": 82.04,
         "tps_p95": 90.14,
         "ttft_ms_mean": 209.71,
+        "input_tokens": 37,
         "vram_peak_gb": 18.944175720214844,
         "timestamp": "2026-08-10T20:40:50Z",
         "run_id": "31448414661",
@@ -296,6 +312,7 @@
         "tps_mean": 71.76,
         "tps_p95": 86.1,
         "ttft_ms_mean": 270.77,
+        "input_tokens": 37,
         "vram_peak_gb": 18.952423095703125,
         "timestamp": "2026-08-10T18:31:23Z",
         "run_id": "31448414661",
@@ -316,6 +333,7 @@
         "tps_mean": 12.14,
         "tps_p95": 12.17,
         "ttft_ms_mean": 789.25,
+        "input_tokens": 30,
         "vram_peak_gb": 22.91796112060547,
         "timestamp": "2026-08-11T00:01:42Z",
         "run_id": "31448414661",
@@ -334,6 +352,7 @@
         "tps_mean": 11.3,
         "tps_p95": 11.8,
         "ttft_ms_mean": 409.26,
+        "input_tokens": 30,
         "vram_peak_gb": 22.388687133789062,
         "timestamp": "2026-08-10T22:30:23Z",
         "run_id": "31448414661",
@@ -352,6 +371,7 @@
         "tps_mean": 10.69,
         "tps_p95": 11.19,
         "ttft_ms_mean": 448.75,
+        "input_tokens": 30,
         "vram_peak_gb": 22.350337982177734,
         "timestamp": "2026-08-10T21:02:20Z",
         "run_id": "31448414661",
@@ -370,6 +390,7 @@
         "tps_mean": 10.42,
         "tps_p95": 11.11,
         "ttft_ms_mean": 545.77,
+        "input_tokens": 30,
         "vram_peak_gb": 22.363056182861328,
         "timestamp": "2026-08-10T18:50:11Z",
         "run_id": "31448414661",
@@ -390,6 +411,7 @@
         "tps_mean": 11.74,
         "tps_p95": 11.75,
         "ttft_ms_mean": 848.3,
+        "input_tokens": 37,
         "vram_peak_gb": 22.917831420898438,
         "timestamp": "2026-08-11T00:01:42Z",
         "run_id": "31448414661",
@@ -408,6 +430,7 @@
         "tps_mean": 11.07,
         "tps_p95": 11.45,
         "ttft_ms_mean": 535.86,
+        "input_tokens": 37,
         "vram_peak_gb": 22.392623901367188,
         "timestamp": "2026-08-10T22:30:23Z",
         "run_id": "31448414661",
@@ -426,6 +449,7 @@
         "tps_mean": 10.66,
         "tps_p95": 10.79,
         "ttft_ms_mean": 490.64,
+        "input_tokens": 37,
         "vram_peak_gb": 22.366966247558594,
         "timestamp": "2026-08-10T18:50:11Z",
         "run_id": "31448414661",
@@ -444,6 +468,7 @@
         "tps_mean": 10.59,
         "tps_p95": 10.67,
         "ttft_ms_mean": 426.88,
+        "input_tokens": 37,
         "vram_peak_gb": 22.352294921875,
         "timestamp": "2026-08-10T21:02:20Z",
         "run_id": "31448414661",
@@ -464,6 +489,7 @@
         "tps_mean": 33.34,
         "tps_p95": 33.46,
         "ttft_ms_mean": 805.59,
+        "input_tokens": 30,
         "vram_peak_gb": 23.826332092285156,
         "timestamp": "2026-08-11T00:06:57Z",
         "run_id": "31448414661",
@@ -482,6 +508,7 @@
         "tps_mean": 22.83,
         "tps_p95": 24.47,
         "ttft_ms_mean": 463.37,
+        "input_tokens": 30,
         "vram_peak_gb": 22.90106964111328,
         "timestamp": "2026-08-10T21:09:21Z",
         "run_id": "31448414661",
@@ -500,6 +527,7 @@
         "tps_mean": 22.49,
         "tps_p95": 23.4,
         "ttft_ms_mean": 397.73,
+        "input_tokens": 30,
         "vram_peak_gb": 22.94841766357422,
         "timestamp": "2026-08-10T22:38:15Z",
         "run_id": "31448414661",
@@ -518,6 +546,7 @@
         "tps_mean": 21.16,
         "tps_p95": 23.0,
         "ttft_ms_mean": 529.96,
+        "input_tokens": 30,
         "vram_peak_gb": 22.913848876953125,
         "timestamp": "2026-08-10T18:56:34Z",
         "run_id": "31448414661",
@@ -538,6 +567,7 @@
         "tps_mean": 35.14,
         "tps_p95": 35.22,
         "ttft_ms_mean": 863.24,
+        "input_tokens": 37,
         "vram_peak_gb": 23.826324462890625,
         "timestamp": "2026-08-11T00:06:57Z",
         "run_id": "31448414661",
@@ -556,6 +586,7 @@
         "tps_mean": 23.7,
         "tps_p95": 23.99,
         "ttft_ms_mean": 513.58,
+        "input_tokens": 37,
         "vram_peak_gb": 22.952903747558594,
         "timestamp": "2026-08-10T22:38:15Z",
         "run_id": "31448414661",
@@ -574,6 +605,7 @@
         "tps_mean": 22.6,
         "tps_p95": 23.67,
         "ttft_ms_mean": 543.23,
+        "input_tokens": 37,
         "vram_peak_gb": 22.918270111083984,
         "timestamp": "2026-08-10T18:56:34Z",
         "run_id": "31448414661",
@@ -592,6 +624,7 @@
         "tps_mean": 21.83,
         "tps_p95": 23.9,
         "ttft_ms_mean": 500.37,
+        "input_tokens": 37,
         "vram_peak_gb": 22.903518676757812,
         "timestamp": "2026-08-10T21:09:21Z",
         "run_id": "31448414661",
@@ -612,6 +645,7 @@
         "tps_mean": 222.74,
         "tps_p95": 225.04,
         "ttft_ms_mean": 218.41,
+        "input_tokens": 29,
         "vram_peak_gb": 2.1351966857910156,
         "timestamp": "2026-08-11T00:18:14Z",
         "run_id": "31448414661",
@@ -630,6 +664,7 @@
         "tps_mean": 171.08,
         "tps_p95": 197.25,
         "ttft_ms_mean": 30.01,
+        "input_tokens": 29,
         "vram_peak_gb": 2.1735610961914062,
         "timestamp": "2026-08-10T19:02:35Z",
         "run_id": "31448414661",
@@ -648,6 +683,7 @@
         "tps_mean": 170.48,
         "tps_p95": 201.07,
         "ttft_ms_mean": 30.84,
+        "input_tokens": 29,
         "vram_peak_gb": 2.1627273559570312,
         "timestamp": "2026-08-10T21:20:08Z",
         "run_id": "31448414661",
@@ -666,6 +702,7 @@
         "tps_mean": 120.94,
         "tps_p95": 209.69,
         "ttft_ms_mean": 32.0,
+        "input_tokens": 29,
         "vram_peak_gb": 2.1797027587890625,
         "timestamp": "2026-08-10T22:51:08Z",
         "run_id": "31448414661",
@@ -686,6 +723,7 @@
         "tps_mean": 220.33,
         "tps_p95": 221.34,
         "ttft_ms_mean": 220.04,
+        "input_tokens": 36,
         "vram_peak_gb": 2.1354103088378906,
         "timestamp": "2026-08-11T00:18:14Z",
         "run_id": "31448414661",
@@ -704,6 +742,7 @@
         "tps_mean": 206.58,
         "tps_p95": 223.47,
         "ttft_ms_mean": 33.34,
+        "input_tokens": 36,
         "vram_peak_gb": 2.1797256469726562,
         "timestamp": "2026-08-10T22:51:08Z",
         "run_id": "31448414661",
@@ -722,6 +761,7 @@
         "tps_mean": 182.75,
         "tps_p95": 201.67,
         "ttft_ms_mean": 32.19,
+        "input_tokens": 36,
         "vram_peak_gb": 2.1627273559570312,
         "timestamp": "2026-08-10T21:20:08Z",
         "run_id": "31448414661",
@@ -740,6 +780,7 @@
         "tps_mean": 170.8,
         "tps_p95": 201.84,
         "ttft_ms_mean": 31.11,
+        "input_tokens": 36,
         "vram_peak_gb": 2.173553466796875,
         "timestamp": "2026-08-10T19:02:35Z",
         "run_id": "31448414661",
@@ -760,6 +801,7 @@
         "tps_mean": 282.94,
         "tps_p95": 283.65,
         "ttft_ms_mean": 12.61,
+        "input_tokens": 30,
         "vram_peak_gb": 0.9948806762695312,
         "timestamp": "2026-08-11T00:20:08Z",
         "run_id": "31448414661",
@@ -778,6 +820,7 @@
         "tps_mean": 214.56,
         "tps_p95": 216.31,
         "ttft_ms_mean": 52.52,
+        "input_tokens": 30,
         "vram_peak_gb": 1.1584663391113281,
         "timestamp": "2026-08-10T21:22:57Z",
         "run_id": "31448414661",
@@ -796,6 +839,7 @@
         "tps_mean": 207.21,
         "tps_p95": 209.1,
         "ttft_ms_mean": 100.91,
+        "input_tokens": 30,
         "vram_peak_gb": 1.1502876281738281,
         "timestamp": "2026-08-10T19:06:24Z",
         "run_id": "31448414661",
@@ -814,6 +858,7 @@
         "tps_mean": 126.12,
         "tps_p95": 222.96,
         "ttft_ms_mean": 18.93,
+        "input_tokens": 30,
         "vram_peak_gb": 1.1545829772949219,
         "timestamp": "2026-08-10T22:53:20Z",
         "run_id": "31448414661",
@@ -834,6 +879,7 @@
         "tps_mean": 274.16,
         "tps_p95": 275.0,
         "ttft_ms_mean": 16.47,
+        "input_tokens": 37,
         "vram_peak_gb": 0.9944686889648438,
         "timestamp": "2026-08-11T00:20:08Z",
         "run_id": "31448414661",
@@ -852,6 +898,7 @@
         "tps_mean": 201.89,
         "tps_p95": 222.2,
         "ttft_ms_mean": 21.05,
+        "input_tokens": 37,
         "vram_peak_gb": 1.1584663391113281,
         "timestamp": "2026-08-10T21:22:57Z",
         "run_id": "31448414661",
@@ -870,6 +917,7 @@
         "tps_mean": 198.81,
         "tps_p95": 220.53,
         "ttft_ms_mean": 20.8,
+        "input_tokens": 37,
         "vram_peak_gb": 1.1502876281738281,
         "timestamp": "2026-08-10T19:06:24Z",
         "run_id": "31448414661",
@@ -888,6 +936,7 @@
         "tps_mean": 154.66,
         "tps_p95": 224.61,
         "ttft_ms_mean": 20.66,
+        "input_tokens": 37,
         "vram_peak_gb": 1.1545829772949219,
         "timestamp": "2026-08-10T22:53:20Z",
         "run_id": "31448414661",
@@ -908,6 +957,7 @@
         "tps_mean": 82.07,
         "tps_p95": 83.29,
         "ttft_ms_mean": 32.1,
+        "input_tokens": 27,
         "vram_peak_gb": 3.3818092346191406,
         "timestamp": "2026-08-10T16:35:15Z",
         "run_id": "31439548244",
@@ -926,6 +976,7 @@
         "tps_mean": 64.4,
         "tps_p95": 80.38,
         "ttft_ms_mean": 40.36,
+        "input_tokens": 27,
         "vram_peak_gb": 3.3203048706054688,
         "timestamp": "2026-08-10T16:16:35Z",
         "run_id": "31439548244",
@@ -944,6 +995,7 @@
         "tps_mean": 57.08,
         "tps_p95": 75.0,
         "ttft_ms_mean": 44.45,
+        "input_tokens": 27,
         "vram_peak_gb": 3.3149566650390625,
         "timestamp": "2026-08-10T15:50:48Z",
         "run_id": "31439548244",
@@ -964,6 +1016,7 @@
         "tps_mean": 80.96,
         "tps_p95": 81.06,
         "ttft_ms_mean": 38.01,
+        "input_tokens": 34,
         "vram_peak_gb": 3.314502716064453,
         "timestamp": "2026-08-10T16:16:35Z",
         "run_id": "31439548244",
@@ -982,6 +1035,7 @@
         "tps_mean": 77.91,
         "tps_p95": 78.69,
         "ttft_ms_mean": 48.8,
+        "input_tokens": 34,
         "vram_peak_gb": 3.3855934143066406,
         "timestamp": "2026-08-10T16:35:15Z",
         "run_id": "31439548244",
@@ -1000,6 +1054,7 @@
         "tps_mean": 65.12,
         "tps_p95": 67.5,
         "ttft_ms_mean": 37.54,
+        "input_tokens": 34,
         "vram_peak_gb": 3.3100852966308594,
         "timestamp": "2026-08-10T15:50:48Z",
         "run_id": "31439548244",
@@ -1020,6 +1075,7 @@
         "tps_mean": 91.78,
         "tps_p95": 92.18,
         "ttft_ms_mean": 122.7,
+        "input_tokens": 27,
         "vram_peak_gb": 17.964229583740234,
         "timestamp": "2026-08-11T01:03:13Z",
         "run_id": "31448414661",
@@ -1038,6 +1094,7 @@
         "tps_mean": 73.74,
         "tps_p95": 77.37,
         "ttft_ms_mean": 104.28,
+        "input_tokens": 27,
         "vram_peak_gb": 18.104537963867188,
         "timestamp": "2026-08-10T23:19:31Z",
         "run_id": "31448414661",
@@ -1056,6 +1113,7 @@
         "tps_mean": 67.45,
         "tps_p95": 74.42,
         "ttft_ms_mean": 150.51,
+        "input_tokens": 27,
         "vram_peak_gb": 18.106433868408203,
         "timestamp": "2026-08-10T21:49:19Z",
         "run_id": "31448414661",
@@ -1074,6 +1132,7 @@
         "tps_mean": 62.15,
         "tps_p95": 73.52,
         "ttft_ms_mean": 133.19,
+        "input_tokens": 27,
         "vram_peak_gb": 18.0982666015625,
         "timestamp": "2026-08-10T19:59:19Z",
         "run_id": "31448414661",
@@ -1094,6 +1153,7 @@
         "tps_mean": 89.35,
         "tps_p95": 89.87,
         "ttft_ms_mean": 197.0,
+        "input_tokens": 34,
         "vram_peak_gb": 17.96560287475586,
         "timestamp": "2026-08-11T01:03:13Z",
         "run_id": "31448414661",
@@ -1112,6 +1172,7 @@
         "tps_mean": 69.77,
         "tps_p95": 74.56,
         "ttft_ms_mean": 137.95,
+        "input_tokens": 34,
         "vram_peak_gb": 18.10455322265625,
         "timestamp": "2026-08-10T23:19:31Z",
         "run_id": "31448414661",
@@ -1130,6 +1191,7 @@
         "tps_mean": 65.63,
         "tps_p95": 67.27,
         "ttft_ms_mean": 176.85,
+        "input_tokens": 34,
         "vram_peak_gb": 18.0982666015625,
         "timestamp": "2026-08-10T19:59:19Z",
         "run_id": "31448414661",
@@ -1148,6 +1210,7 @@
         "tps_mean": 63.25,
         "tps_p95": 67.39,
         "ttft_ms_mean": 170.72,
+        "input_tokens": 34,
         "vram_peak_gb": 18.106422424316406,
         "timestamp": "2026-08-10T21:49:19Z",
         "run_id": "31448414661",
@@ -1168,6 +1231,7 @@
         "tps_mean": 61.1,
         "tps_p95": 62.11,
         "ttft_ms_mean": 593.89,
+        "input_tokens": 29,
         "vram_peak_gb": 4.658390045166016,
         "timestamp": "2026-08-11T01:07:18Z",
         "run_id": "31448414661",
@@ -1186,6 +1250,7 @@
         "tps_mean": 58.95,
         "tps_p95": 59.52,
         "ttft_ms_mean": 102.83,
+        "input_tokens": 29,
         "vram_peak_gb": 4.393611907958984,
         "timestamp": "2026-08-10T20:04:23Z",
         "run_id": "31448414661",
@@ -1204,6 +1269,7 @@
         "tps_mean": 51.38,
         "tps_p95": 58.62,
         "ttft_ms_mean": 105.81,
+        "input_tokens": 29,
         "vram_peak_gb": 4.382843017578125,
         "timestamp": "2026-08-10T21:54:00Z",
         "run_id": "31448414661",
@@ -1222,6 +1288,7 @@
         "tps_mean": 49.12,
         "tps_p95": 60.86,
         "ttft_ms_mean": 104.28,
+        "input_tokens": 29,
         "vram_peak_gb": 4.402324676513672,
         "timestamp": "2026-08-10T23:24:21Z",
         "run_id": "31448414661",
@@ -1242,6 +1309,7 @@
         "tps_mean": 59.58,
         "tps_p95": 60.47,
         "ttft_ms_mean": 603.23,
+        "input_tokens": 36,
         "vram_peak_gb": 4.658222198486328,
         "timestamp": "2026-08-11T01:07:18Z",
         "run_id": "31448414661",
@@ -1260,6 +1328,7 @@
         "tps_mean": 56.4,
         "tps_p95": 57.1,
         "ttft_ms_mean": 151.49,
+        "input_tokens": 36,
         "vram_peak_gb": 4.434452056884766,
         "timestamp": "2026-08-10T20:04:23Z",
         "run_id": "31448414661",
@@ -1278,6 +1347,7 @@
         "tps_mean": 53.41,
         "tps_p95": 57.52,
         "ttft_ms_mean": 150.74,
+        "input_tokens": 36,
         "vram_peak_gb": 4.427516937255859,
         "timestamp": "2026-08-10T21:54:00Z",
         "run_id": "31448414661",
@@ -1296,6 +1366,7 @@
         "tps_mean": 52.55,
         "tps_p95": 59.52,
         "ttft_ms_mean": 179.68,
+        "input_tokens": 36,
         "vram_peak_gb": 4.448905944824219,
         "timestamp": "2026-08-10T23:24:21Z",
         "run_id": "31448414661",
@@ -1316,6 +1387,7 @@
         "tps_mean": 33.66,
         "tps_p95": 34.28,
         "ttft_ms_mean": 1907.77,
+        "input_tokens": 29,
         "vram_peak_gb": 20.982345581054688,
         "timestamp": "2026-08-11T01:14:38Z",
         "run_id": "31448414661",
@@ -1334,6 +1406,7 @@
         "tps_mean": 26.43,
         "tps_p95": 27.7,
         "ttft_ms_mean": 483.5,
+        "input_tokens": 29,
         "vram_peak_gb": 20.484134674072266,
         "timestamp": "2026-08-10T23:29:43Z",
         "run_id": "31448414661",
@@ -1352,6 +1425,7 @@
         "tps_mean": 25.79,
         "tps_p95": 28.45,
         "ttft_ms_mean": 573.97,
+        "input_tokens": 29,
         "vram_peak_gb": 20.45885467529297,
         "timestamp": "2026-08-10T22:01:19Z",
         "run_id": "31448414661",
@@ -1370,6 +1444,7 @@
         "tps_mean": 24.87,
         "tps_p95": 27.48,
         "ttft_ms_mean": 561.49,
+        "input_tokens": 29,
         "vram_peak_gb": 20.469650268554688,
         "timestamp": "2026-08-10T20:15:00Z",
         "run_id": "31448414661",
@@ -1390,6 +1465,7 @@
         "tps_mean": 27.78,
         "tps_p95": 27.9,
         "ttft_ms_mean": 1916.1,
+        "input_tokens": 36,
         "vram_peak_gb": 20.982437133789062,
         "timestamp": "2026-08-11T01:14:38Z",
         "run_id": "31448414661",
@@ -1408,6 +1484,7 @@
         "tps_mean": 24.69,
         "tps_p95": 24.74,
         "ttft_ms_mean": 553.67,
+        "input_tokens": 36,
         "vram_peak_gb": 20.478046417236328,
         "timestamp": "2026-08-10T20:15:00Z",
         "run_id": "31448414661",
@@ -1426,6 +1503,7 @@
         "tps_mean": 22.86,
         "tps_p95": 23.86,
         "ttft_ms_mean": 705.29,
+        "input_tokens": 36,
         "vram_peak_gb": 20.468738555908203,
         "timestamp": "2026-08-10T22:01:19Z",
         "run_id": "31448414661",
@@ -1444,6 +1522,7 @@
         "tps_mean": 22.53,
         "tps_p95": 23.01,
         "ttft_ms_mean": 492.11,
+        "input_tokens": 36,
         "vram_peak_gb": 20.49236297607422,
         "timestamp": "2026-08-10T23:29:43Z",
         "run_id": "31448414661",
@@ -1464,6 +1543,7 @@
         "tps_mean": 60.37,
         "tps_p95": 61.15,
         "ttft_ms_mean": 790.79,
+        "input_tokens": 29,
         "vram_peak_gb": 22.518508911132812,
         "timestamp": "2026-08-11T01:18:07Z",
         "run_id": "31448414661",
@@ -1482,6 +1562,7 @@
         "tps_mean": 50.87,
         "tps_p95": 56.64,
         "ttft_ms_mean": 174.14,
+        "input_tokens": 29,
         "vram_peak_gb": 22.28573226928711,
         "timestamp": "2026-08-10T23:31:35Z",
         "run_id": "31448414661",
@@ -1500,6 +1581,7 @@
         "tps_mean": 47.75,
         "tps_p95": 54.2,
         "ttft_ms_mean": 179.66,
+        "input_tokens": 29,
         "vram_peak_gb": 22.277374267578125,
         "timestamp": "2026-08-10T20:17:08Z",
         "run_id": "31448414661",
@@ -1518,6 +1600,7 @@
         "tps_mean": 44.86,
         "tps_p95": 54.34,
         "ttft_ms_mean": 181.87,
+        "input_tokens": 29,
         "vram_peak_gb": 22.264652252197266,
         "timestamp": "2026-08-10T22:05:01Z",
         "run_id": "31448414661",
@@ -1538,6 +1621,7 @@
         "tps_mean": 58.7,
         "tps_p95": 59.11,
         "ttft_ms_mean": 814.11,
+        "input_tokens": 36,
         "vram_peak_gb": 22.518447875976562,
         "timestamp": "2026-08-11T01:18:07Z",
         "run_id": "31448414661",
@@ -1556,6 +1640,7 @@
         "tps_mean": 52.75,
         "tps_p95": 54.83,
         "ttft_ms_mean": 190.21,
+        "input_tokens": 36,
         "vram_peak_gb": 22.291839599609375,
         "timestamp": "2026-08-10T23:31:35Z",
         "run_id": "31448414661",
@@ -1574,6 +1659,7 @@
         "tps_mean": 47.86,
         "tps_p95": 50.82,
         "ttft_ms_mean": 210.89,
+        "input_tokens": 36,
         "vram_peak_gb": 22.26987075805664,
         "timestamp": "2026-08-10T22:05:01Z",
         "run_id": "31448414661",
@@ -1592,6 +1678,7 @@
         "tps_mean": 46.97,
         "tps_p95": 49.68,
         "ttft_ms_mean": 246.1,
+        "input_tokens": 36,
         "vram_peak_gb": 22.28225326538086,
         "timestamp": "2026-08-10T20:17:08Z",
         "run_id": "31448414661",
@@ -1609,6 +1696,7 @@
             "timestamp": "2026-08-09T23:04:44Z",
             "tps_mean": 47.09,
             "ttft_ms_mean": 204.41,
+            "input_tokens": 30,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -1617,6 +1705,7 @@
             "timestamp": "2026-08-10T16:17:31Z",
             "tps_mean": 46.81,
             "ttft_ms_mean": 180.34,
+            "input_tokens": 30,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -1625,6 +1714,7 @@
             "timestamp": "2026-08-10T22:16:16Z",
             "tps_mean": 50.07,
             "ttft_ms_mean": 158.74,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1635,6 +1725,7 @@
             "timestamp": "2026-08-09T22:47:09Z",
             "tps_mean": 47.24,
             "ttft_ms_mean": 181.49,
+            "input_tokens": 30,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -1643,6 +1734,7 @@
             "timestamp": "2026-08-10T15:51:44Z",
             "tps_mean": 44.67,
             "ttft_ms_mean": 178.65,
+            "input_tokens": 30,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -1651,6 +1743,7 @@
             "timestamp": "2026-08-10T18:27:00Z",
             "tps_mean": 44.34,
             "ttft_ms_mean": 201.96,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1661,6 +1754,7 @@
             "timestamp": "2026-08-10T20:32:21Z",
             "tps_mean": 43.41,
             "ttft_ms_mean": 192.48,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1671,6 +1765,7 @@
             "timestamp": "2026-08-09T23:18:55Z",
             "tps_mean": 53.02,
             "ttft_ms_mean": 224.77,
+            "input_tokens": 30,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -1679,6 +1774,7 @@
             "timestamp": "2026-08-10T16:36:07Z",
             "tps_mean": 53.38,
             "ttft_ms_mean": 223.08,
+            "input_tokens": 30,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -1687,6 +1783,7 @@
             "timestamp": "2026-08-10T23:38:59Z",
             "tps_mean": 52.64,
             "ttft_ms_mean": 227.67,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1699,6 +1796,7 @@
             "timestamp": "2026-08-09T23:04:44Z",
             "tps_mean": 47.35,
             "ttft_ms_mean": 209.26,
+            "input_tokens": 37,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -1707,6 +1805,7 @@
             "timestamp": "2026-08-10T16:17:31Z",
             "tps_mean": 46.81,
             "ttft_ms_mean": 194.77,
+            "input_tokens": 37,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -1715,6 +1814,7 @@
             "timestamp": "2026-08-10T22:16:16Z",
             "tps_mean": 49.95,
             "ttft_ms_mean": 172.52,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1725,6 +1825,7 @@
             "timestamp": "2026-08-09T22:47:09Z",
             "tps_mean": 45.84,
             "ttft_ms_mean": 266.68,
+            "input_tokens": 37,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -1733,6 +1834,7 @@
             "timestamp": "2026-08-10T15:51:44Z",
             "tps_mean": 46.5,
             "ttft_ms_mean": 212.17,
+            "input_tokens": 37,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -1741,6 +1843,7 @@
             "timestamp": "2026-08-10T18:27:00Z",
             "tps_mean": 42.04,
             "ttft_ms_mean": 228.18,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1751,6 +1854,7 @@
             "timestamp": "2026-08-10T20:32:21Z",
             "tps_mean": 45.21,
             "ttft_ms_mean": 205.28,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1761,6 +1865,7 @@
             "timestamp": "2026-08-09T23:18:55Z",
             "tps_mean": 52.02,
             "ttft_ms_mean": 248.89,
+            "input_tokens": 37,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -1769,6 +1874,7 @@
             "timestamp": "2026-08-10T16:36:07Z",
             "tps_mean": 51.0,
             "ttft_ms_mean": 250.3,
+            "input_tokens": 37,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -1777,6 +1883,7 @@
             "timestamp": "2026-08-10T23:38:59Z",
             "tps_mean": 51.5,
             "ttft_ms_mean": 255.64,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1791,6 +1898,7 @@
             "timestamp": "2026-08-10T22:18:48Z",
             "tps_mean": 75.01,
             "ttft_ms_mean": 160.77,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1801,6 +1909,7 @@
             "timestamp": "2026-08-10T18:31:23Z",
             "tps_mean": 77.38,
             "ttft_ms_mean": 214.61,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1811,6 +1920,7 @@
             "timestamp": "2026-08-10T20:40:50Z",
             "tps_mean": 77.38,
             "ttft_ms_mean": 204.63,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1821,6 +1931,7 @@
             "timestamp": "2026-08-10T23:46:03Z",
             "tps_mean": 81.0,
             "ttft_ms_mean": 228.02,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1833,6 +1944,7 @@
             "timestamp": "2026-08-10T22:18:48Z",
             "tps_mean": 87.56,
             "ttft_ms_mean": 175.0,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1843,6 +1955,7 @@
             "timestamp": "2026-08-10T18:31:23Z",
             "tps_mean": 71.76,
             "ttft_ms_mean": 270.77,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1853,6 +1966,7 @@
             "timestamp": "2026-08-10T20:40:50Z",
             "tps_mean": 82.04,
             "ttft_ms_mean": 209.71,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1863,6 +1977,7 @@
             "timestamp": "2026-08-10T23:46:03Z",
             "tps_mean": 93.12,
             "ttft_ms_mean": 256.76,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1877,6 +1992,7 @@
             "timestamp": "2026-08-10T22:30:23Z",
             "tps_mean": 11.3,
             "ttft_ms_mean": 409.26,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1887,6 +2003,7 @@
             "timestamp": "2026-08-10T18:50:11Z",
             "tps_mean": 10.42,
             "ttft_ms_mean": 545.77,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1897,6 +2014,7 @@
             "timestamp": "2026-08-10T21:02:20Z",
             "tps_mean": 10.69,
             "ttft_ms_mean": 448.75,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1907,6 +2025,7 @@
             "timestamp": "2026-08-11T00:01:42Z",
             "tps_mean": 12.14,
             "ttft_ms_mean": 789.25,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1919,6 +2038,7 @@
             "timestamp": "2026-08-10T22:30:23Z",
             "tps_mean": 11.07,
             "ttft_ms_mean": 535.86,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1929,6 +2049,7 @@
             "timestamp": "2026-08-10T18:50:11Z",
             "tps_mean": 10.66,
             "ttft_ms_mean": 490.64,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1939,6 +2060,7 @@
             "timestamp": "2026-08-10T21:02:20Z",
             "tps_mean": 10.59,
             "ttft_ms_mean": 426.88,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1949,6 +2071,7 @@
             "timestamp": "2026-08-11T00:01:42Z",
             "tps_mean": 11.74,
             "ttft_ms_mean": 848.3,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1963,6 +2086,7 @@
             "timestamp": "2026-08-10T22:38:15Z",
             "tps_mean": 22.49,
             "ttft_ms_mean": 397.73,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1973,6 +2097,7 @@
             "timestamp": "2026-08-10T18:56:34Z",
             "tps_mean": 21.16,
             "ttft_ms_mean": 529.96,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1983,6 +2108,7 @@
             "timestamp": "2026-08-10T21:09:21Z",
             "tps_mean": 22.83,
             "ttft_ms_mean": 463.37,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -1993,6 +2119,7 @@
             "timestamp": "2026-08-11T00:06:57Z",
             "tps_mean": 33.34,
             "ttft_ms_mean": 805.59,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2005,6 +2132,7 @@
             "timestamp": "2026-08-10T22:38:15Z",
             "tps_mean": 23.7,
             "ttft_ms_mean": 513.58,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2015,6 +2143,7 @@
             "timestamp": "2026-08-10T18:56:34Z",
             "tps_mean": 22.6,
             "ttft_ms_mean": 543.23,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2025,6 +2154,7 @@
             "timestamp": "2026-08-10T21:09:21Z",
             "tps_mean": 21.83,
             "ttft_ms_mean": 500.37,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2035,6 +2165,7 @@
             "timestamp": "2026-08-11T00:06:57Z",
             "tps_mean": 35.14,
             "ttft_ms_mean": 863.24,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2049,6 +2180,7 @@
             "timestamp": "2026-08-10T22:51:08Z",
             "tps_mean": 120.94,
             "ttft_ms_mean": 32.0,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2059,6 +2191,7 @@
             "timestamp": "2026-08-10T19:02:35Z",
             "tps_mean": 171.08,
             "ttft_ms_mean": 30.01,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2069,6 +2202,7 @@
             "timestamp": "2026-08-10T21:20:08Z",
             "tps_mean": 170.48,
             "ttft_ms_mean": 30.84,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2079,6 +2213,7 @@
             "timestamp": "2026-08-11T00:18:14Z",
             "tps_mean": 222.74,
             "ttft_ms_mean": 218.41,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2091,6 +2226,7 @@
             "timestamp": "2026-08-10T22:51:08Z",
             "tps_mean": 206.58,
             "ttft_ms_mean": 33.34,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2101,6 +2237,7 @@
             "timestamp": "2026-08-10T19:02:35Z",
             "tps_mean": 170.8,
             "ttft_ms_mean": 31.11,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2111,6 +2248,7 @@
             "timestamp": "2026-08-10T21:20:08Z",
             "tps_mean": 182.75,
             "ttft_ms_mean": 32.19,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2121,6 +2259,7 @@
             "timestamp": "2026-08-11T00:18:14Z",
             "tps_mean": 220.33,
             "ttft_ms_mean": 220.04,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2135,6 +2274,7 @@
             "timestamp": "2026-08-10T22:53:20Z",
             "tps_mean": 126.12,
             "ttft_ms_mean": 18.93,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2145,6 +2285,7 @@
             "timestamp": "2026-08-10T19:06:24Z",
             "tps_mean": 207.21,
             "ttft_ms_mean": 100.91,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2155,6 +2296,7 @@
             "timestamp": "2026-08-10T21:22:57Z",
             "tps_mean": 214.56,
             "ttft_ms_mean": 52.52,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2165,6 +2307,7 @@
             "timestamp": "2026-08-11T00:20:08Z",
             "tps_mean": 282.94,
             "ttft_ms_mean": 12.61,
+            "input_tokens": 30,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2177,6 +2320,7 @@
             "timestamp": "2026-08-10T22:53:20Z",
             "tps_mean": 154.66,
             "ttft_ms_mean": 20.66,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2187,6 +2331,7 @@
             "timestamp": "2026-08-10T19:06:24Z",
             "tps_mean": 198.81,
             "ttft_ms_mean": 20.8,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2197,6 +2342,7 @@
             "timestamp": "2026-08-10T21:22:57Z",
             "tps_mean": 201.89,
             "ttft_ms_mean": 21.05,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2207,6 +2353,7 @@
             "timestamp": "2026-08-11T00:20:08Z",
             "tps_mean": 274.16,
             "ttft_ms_mean": 16.47,
+            "input_tokens": 37,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2221,6 +2368,7 @@
             "timestamp": "2026-08-09T17:42:23Z",
             "tps_mean": 79.18,
             "ttft_ms_mean": 37.05,
+            "input_tokens": 27,
             "run_id": null,
             "run_url": null
           },
@@ -2229,6 +2377,7 @@
             "timestamp": "2026-08-09T17:54:10Z",
             "tps_mean": 78.76,
             "ttft_ms_mean": 37.62,
+            "input_tokens": 27,
             "run_id": null,
             "run_url": null
           },
@@ -2237,6 +2386,7 @@
             "timestamp": "2026-08-09T23:03:50Z",
             "tps_mean": 41.66,
             "ttft_ms_mean": 37.7,
+            "input_tokens": 27,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2245,6 +2395,7 @@
             "timestamp": "2026-08-10T16:16:35Z",
             "tps_mean": 64.4,
             "ttft_ms_mean": 40.36,
+            "input_tokens": 27,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           }
@@ -2255,6 +2406,7 @@
             "timestamp": "2026-08-09T17:38:49Z",
             "tps_mean": 48.52,
             "ttft_ms_mean": 44.69,
+            "input_tokens": 27,
             "run_id": null,
             "run_url": null
           },
@@ -2263,6 +2415,7 @@
             "timestamp": "2026-08-09T17:51:02Z",
             "tps_mean": 79.63,
             "ttft_ms_mean": 44.9,
+            "input_tokens": 27,
             "run_id": null,
             "run_url": null
           },
@@ -2271,6 +2424,7 @@
             "timestamp": "2026-08-09T22:46:13Z",
             "tps_mean": 58.09,
             "ttft_ms_mean": 44.84,
+            "input_tokens": 27,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2279,6 +2433,7 @@
             "timestamp": "2026-08-10T15:50:48Z",
             "tps_mean": 57.08,
             "ttft_ms_mean": 44.45,
+            "input_tokens": 27,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           }
@@ -2289,6 +2444,7 @@
             "timestamp": "2026-08-09T17:46:27Z",
             "tps_mean": 81.87,
             "ttft_ms_mean": 31.3,
+            "input_tokens": 27,
             "run_id": null,
             "run_url": null
           },
@@ -2297,6 +2453,7 @@
             "timestamp": "2026-08-09T17:56:00Z",
             "tps_mean": 82.06,
             "ttft_ms_mean": 31.69,
+            "input_tokens": 27,
             "run_id": null,
             "run_url": null
           },
@@ -2305,6 +2462,7 @@
             "timestamp": "2026-08-09T23:18:05Z",
             "tps_mean": 80.99,
             "ttft_ms_mean": 30.61,
+            "input_tokens": 27,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2313,6 +2471,7 @@
             "timestamp": "2026-08-10T16:35:15Z",
             "tps_mean": 82.07,
             "ttft_ms_mean": 32.1,
+            "input_tokens": 27,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           }
@@ -2325,6 +2484,7 @@
             "timestamp": "2026-08-09T17:42:23Z",
             "tps_mean": 76.46,
             "ttft_ms_mean": 38.14,
+            "input_tokens": 34,
             "run_id": null,
             "run_url": null
           },
@@ -2333,6 +2493,7 @@
             "timestamp": "2026-08-09T17:54:10Z",
             "tps_mean": 80.94,
             "ttft_ms_mean": 37.23,
+            "input_tokens": 34,
             "run_id": null,
             "run_url": null
           },
@@ -2341,6 +2502,7 @@
             "timestamp": "2026-08-09T23:03:50Z",
             "tps_mean": 61.14,
             "ttft_ms_mean": 37.99,
+            "input_tokens": 34,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2349,6 +2511,7 @@
             "timestamp": "2026-08-10T16:16:35Z",
             "tps_mean": 80.96,
             "ttft_ms_mean": 38.01,
+            "input_tokens": 34,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           }
@@ -2359,6 +2522,7 @@
             "timestamp": "2026-08-09T17:38:49Z",
             "tps_mean": 77.92,
             "ttft_ms_mean": 38.65,
+            "input_tokens": 34,
             "run_id": null,
             "run_url": null
           },
@@ -2367,6 +2531,7 @@
             "timestamp": "2026-08-09T17:51:02Z",
             "tps_mean": 78.09,
             "ttft_ms_mean": 38.34,
+            "input_tokens": 34,
             "run_id": null,
             "run_url": null
           },
@@ -2375,6 +2540,7 @@
             "timestamp": "2026-08-09T22:46:13Z",
             "tps_mean": 69.06,
             "ttft_ms_mean": 92.51,
+            "input_tokens": 34,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2383,6 +2549,7 @@
             "timestamp": "2026-08-10T15:50:48Z",
             "tps_mean": 65.12,
             "ttft_ms_mean": 37.54,
+            "input_tokens": 34,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           }
@@ -2393,6 +2560,7 @@
             "timestamp": "2026-08-09T17:46:27Z",
             "tps_mean": 79.02,
             "ttft_ms_mean": 49.42,
+            "input_tokens": 34,
             "run_id": null,
             "run_url": null
           },
@@ -2401,6 +2569,7 @@
             "timestamp": "2026-08-09T17:56:00Z",
             "tps_mean": 79.09,
             "ttft_ms_mean": 49.32,
+            "input_tokens": 34,
             "run_id": null,
             "run_url": null
           },
@@ -2409,6 +2578,7 @@
             "timestamp": "2026-08-09T23:18:05Z",
             "tps_mean": 78.74,
             "ttft_ms_mean": 48.3,
+            "input_tokens": 34,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2417,6 +2587,7 @@
             "timestamp": "2026-08-10T16:35:15Z",
             "tps_mean": 77.91,
             "ttft_ms_mean": 48.8,
+            "input_tokens": 34,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           }
@@ -2431,6 +2602,7 @@
             "timestamp": "2026-08-10T23:19:31Z",
             "tps_mean": 73.74,
             "ttft_ms_mean": 104.28,
+            "input_tokens": 27,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2441,6 +2613,7 @@
             "timestamp": "2026-08-10T19:59:19Z",
             "tps_mean": 62.15,
             "ttft_ms_mean": 133.19,
+            "input_tokens": 27,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2451,6 +2624,7 @@
             "timestamp": "2026-08-10T21:49:19Z",
             "tps_mean": 67.45,
             "ttft_ms_mean": 150.51,
+            "input_tokens": 27,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2461,6 +2635,7 @@
             "timestamp": "2026-08-11T01:03:13Z",
             "tps_mean": 91.78,
             "ttft_ms_mean": 122.7,
+            "input_tokens": 27,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2473,6 +2648,7 @@
             "timestamp": "2026-08-10T23:19:31Z",
             "tps_mean": 69.77,
             "ttft_ms_mean": 137.95,
+            "input_tokens": 34,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2483,6 +2659,7 @@
             "timestamp": "2026-08-10T19:59:19Z",
             "tps_mean": 65.63,
             "ttft_ms_mean": 176.85,
+            "input_tokens": 34,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2493,6 +2670,7 @@
             "timestamp": "2026-08-10T21:49:19Z",
             "tps_mean": 63.25,
             "ttft_ms_mean": 170.72,
+            "input_tokens": 34,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2503,6 +2681,7 @@
             "timestamp": "2026-08-11T01:03:13Z",
             "tps_mean": 89.35,
             "ttft_ms_mean": 197.0,
+            "input_tokens": 34,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2517,6 +2696,7 @@
             "timestamp": "2026-08-10T23:24:21Z",
             "tps_mean": 49.12,
             "ttft_ms_mean": 104.28,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2527,6 +2707,7 @@
             "timestamp": "2026-08-10T20:04:23Z",
             "tps_mean": 58.95,
             "ttft_ms_mean": 102.83,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2537,6 +2718,7 @@
             "timestamp": "2026-08-10T21:54:00Z",
             "tps_mean": 51.38,
             "ttft_ms_mean": 105.81,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2547,6 +2729,7 @@
             "timestamp": "2026-08-11T01:07:18Z",
             "tps_mean": 61.1,
             "ttft_ms_mean": 593.89,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2559,6 +2742,7 @@
             "timestamp": "2026-08-10T23:24:21Z",
             "tps_mean": 52.55,
             "ttft_ms_mean": 179.68,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2569,6 +2753,7 @@
             "timestamp": "2026-08-10T20:04:23Z",
             "tps_mean": 56.4,
             "ttft_ms_mean": 151.49,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2579,6 +2764,7 @@
             "timestamp": "2026-08-10T21:54:00Z",
             "tps_mean": 53.41,
             "ttft_ms_mean": 150.74,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2589,6 +2775,7 @@
             "timestamp": "2026-08-11T01:07:18Z",
             "tps_mean": 59.58,
             "ttft_ms_mean": 603.23,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2603,6 +2790,7 @@
             "timestamp": "2026-08-10T23:29:43Z",
             "tps_mean": 26.43,
             "ttft_ms_mean": 483.5,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2613,6 +2801,7 @@
             "timestamp": "2026-08-10T20:15:00Z",
             "tps_mean": 24.87,
             "ttft_ms_mean": 561.49,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2623,6 +2812,7 @@
             "timestamp": "2026-08-10T22:01:19Z",
             "tps_mean": 25.79,
             "ttft_ms_mean": 573.97,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2633,6 +2823,7 @@
             "timestamp": "2026-08-11T01:14:38Z",
             "tps_mean": 33.66,
             "ttft_ms_mean": 1907.77,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2645,6 +2836,7 @@
             "timestamp": "2026-08-10T23:29:43Z",
             "tps_mean": 22.53,
             "ttft_ms_mean": 492.11,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2655,6 +2847,7 @@
             "timestamp": "2026-08-10T20:15:00Z",
             "tps_mean": 24.69,
             "ttft_ms_mean": 553.67,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2665,6 +2858,7 @@
             "timestamp": "2026-08-10T22:01:19Z",
             "tps_mean": 22.86,
             "ttft_ms_mean": 705.29,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2675,6 +2869,7 @@
             "timestamp": "2026-08-11T01:14:38Z",
             "tps_mean": 27.78,
             "ttft_ms_mean": 1916.1,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2689,6 +2884,7 @@
             "timestamp": "2026-08-09T23:09:29Z",
             "tps_mean": 51.72,
             "ttft_ms_mean": 200.17,
+            "input_tokens": 29,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2697,6 +2893,7 @@
             "timestamp": "2026-08-10T16:23:47Z",
             "tps_mean": 52.37,
             "ttft_ms_mean": 246.02,
+            "input_tokens": 29,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -2705,6 +2902,7 @@
             "timestamp": "2026-08-10T23:31:35Z",
             "tps_mean": 50.87,
             "ttft_ms_mean": 174.14,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2715,6 +2913,7 @@
             "timestamp": "2026-08-09T22:53:21Z",
             "tps_mean": 48.1,
             "ttft_ms_mean": 216.79,
+            "input_tokens": 29,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2723,6 +2922,7 @@
             "timestamp": "2026-08-10T15:56:39Z",
             "tps_mean": 45.08,
             "ttft_ms_mean": 280.4,
+            "input_tokens": 29,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -2731,6 +2931,7 @@
             "timestamp": "2026-08-10T20:17:08Z",
             "tps_mean": 47.75,
             "ttft_ms_mean": 179.66,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2741,6 +2942,7 @@
             "timestamp": "2026-08-10T22:05:01Z",
             "tps_mean": 44.86,
             "ttft_ms_mean": 181.87,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2751,6 +2953,7 @@
             "timestamp": "2026-08-09T23:24:35Z",
             "tps_mean": 60.03,
             "ttft_ms_mean": 778.12,
+            "input_tokens": 29,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2759,6 +2962,7 @@
             "timestamp": "2026-08-10T16:39:16Z",
             "tps_mean": 60.45,
             "ttft_ms_mean": 766.17,
+            "input_tokens": 29,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -2767,6 +2971,7 @@
             "timestamp": "2026-08-11T01:18:07Z",
             "tps_mean": 60.37,
             "ttft_ms_mean": 790.79,
+            "input_tokens": 29,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2779,6 +2984,7 @@
             "timestamp": "2026-08-09T23:09:29Z",
             "tps_mean": 51.66,
             "ttft_ms_mean": 223.34,
+            "input_tokens": 36,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2787,6 +2993,7 @@
             "timestamp": "2026-08-10T16:23:47Z",
             "tps_mean": 52.72,
             "ttft_ms_mean": 236.65,
+            "input_tokens": 36,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -2795,6 +3002,7 @@
             "timestamp": "2026-08-10T23:31:35Z",
             "tps_mean": 52.75,
             "ttft_ms_mean": 190.21,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2805,6 +3013,7 @@
             "timestamp": "2026-08-09T22:53:21Z",
             "tps_mean": 50.35,
             "ttft_ms_mean": 238.22,
+            "input_tokens": 36,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2813,6 +3022,7 @@
             "timestamp": "2026-08-10T15:56:39Z",
             "tps_mean": 49.42,
             "ttft_ms_mean": 233.27,
+            "input_tokens": 36,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -2821,6 +3031,7 @@
             "timestamp": "2026-08-10T20:17:08Z",
             "tps_mean": 46.97,
             "ttft_ms_mean": 246.1,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2831,6 +3042,7 @@
             "timestamp": "2026-08-10T22:05:01Z",
             "tps_mean": 47.86,
             "ttft_ms_mean": 210.89,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
@@ -2841,6 +3053,7 @@
             "timestamp": "2026-08-09T23:24:35Z",
             "tps_mean": 58.88,
             "ttft_ms_mean": 799.11,
+            "input_tokens": 36,
             "run_id": "31359490245",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31359490245"
           },
@@ -2849,6 +3062,7 @@
             "timestamp": "2026-08-10T16:39:16Z",
             "tps_mean": 58.8,
             "ttft_ms_mean": 790.82,
+            "input_tokens": 36,
             "run_id": "31439548244",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31439548244"
           },
@@ -2857,6 +3071,7 @@
             "timestamp": "2026-08-11T01:18:07Z",
             "tps_mean": 58.7,
             "ttft_ms_mean": 814.11,
+            "input_tokens": 36,
             "run_id": "31448414661",
             "run_url": "https://github.com/lemonade-sdk/lemonade/actions/runs/31448414661"
           }
