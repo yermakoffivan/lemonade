@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-01T03:09:23.076308+00:00",
-  "run_id": "33071718079",
-  "run_url": "https://github.com/yermakoffivan/lemonade/actions/runs/33071718079",
+  "generated_at": "2026-09-05T03:09:55.429131+00:00",
+  "run_id": "33371779719",
+  "run_url": "https://github.com/yermakoffivan/lemonade/actions/runs/33371779719",
   "repo": "yermakoffivan/lemonade",
   "repo_url": "https://github.com/yermakoffivan/lemonade",
   "actions_url": "https://github.com/yermakoffivan/lemonade/actions/workflows/benchmark-regression.yml",
-  "commit": "e1b3168370e8b2472acdbe08298267a4b556cf9e",
+  "commit": "4ed0ce19abd806727453c1d35bc82702f392a380",
   "lemonade_version": null,
   "by_model_scenario": {
     "Gemma-4-26B-A4B-it-GGUF|chat-short": [
